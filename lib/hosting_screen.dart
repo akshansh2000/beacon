@@ -51,6 +51,12 @@ class _HostingScreenState extends State<HostingScreen> {
   }
 
   @override
+  void dispose() {
+    _databaseReference.child(_randomKey).remove();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
 

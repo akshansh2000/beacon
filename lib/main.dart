@@ -3,7 +3,10 @@ import 'package:flutter/services.dart';
 
 import 'package:beacon/home_screen.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
