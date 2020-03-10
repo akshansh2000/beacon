@@ -105,7 +105,27 @@ class _HostingScreenState extends State<HostingScreen> {
                       IconButton(
                         icon: Icon(Icons.arrow_forward_ios),
                         iconSize: 30,
-                        onPressed: () => {},
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          "$_randomKey",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.content_copy),
+                        iconSize: 30,
+                        onPressed: () {},
                       ),
                     ],
                   ),
