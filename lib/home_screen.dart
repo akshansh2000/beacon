@@ -19,10 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            AnimatedContainer(
-              duration: Duration(
-                milliseconds: 500,
-              ),
+            Container(
               width: size.width / 4,
               height: size.width / 4,
               decoration: BoxDecoration(
@@ -31,10 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Center(child: Text("HOST")),
             ),
-            AnimatedContainer(
-              duration: Duration(
-                milliseconds: 500,
-              ),
+            Container(
               width: size.width / 4,
               height: size.width / 4,
               decoration: BoxDecoration(
