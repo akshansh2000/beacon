@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "939001469296",
+    "firebase_url": "https://beacon-659fc.firebaseio.com",
+    "project_id": "beacon-659fc",
+    "storage_bucket": "beacon-659fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939001469296:android:802eb4082b717656a7d7b5",
+        "android_client_info": {
+          "package_name": "com.example.beacon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "939001469296-lo00dkk2ltaensi3uh8phripj022lvv0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVhTI7-w_lgo5d5XJDL-ebPhjudEcWqKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "939001469296-lo00dkk2ltaensi3uh8phripj022lvv0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

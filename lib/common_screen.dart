@@ -5,10 +5,12 @@ class CommonScreen extends StatefulWidget {
     Key key,
     @required this.color,
     @required this.tag,
+    this.child,
   }) : super(key: key);
 
   final Color color;
   final String tag;
+  final Widget child;
 
   @override
   _CommonScreenState createState() => _CommonScreenState();
@@ -34,6 +36,7 @@ class _CommonScreenState extends State<CommonScreen> {
                 ),
                 width: size.width / 1.2,
                 height: size.height / 1.2,
+                child: widget.child,
               ),
             ),
           ),
