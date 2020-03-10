@@ -26,6 +26,7 @@ dependencies:
   firebase_database:
   location:
   url_launcher:
+  random_string:
 
 dev_dependencies:
   flutter_test:
