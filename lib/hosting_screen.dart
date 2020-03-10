@@ -5,6 +5,7 @@ import 'package:beacon/common_screen.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:random_string/random_string.dart';
 import 'package:location/location.dart';
+import 'package:clipboard_manager/clipboard_manager.dart';
 
 class HostingScreen extends StatefulWidget {
   HostingScreen({Key key}) : super(key: key);
@@ -125,7 +126,20 @@ class _HostingScreenState extends State<HostingScreen> {
                       IconButton(
                         icon: Icon(Icons.content_copy),
                         iconSize: 30,
-                        onPressed: () {},
+                        onPressed: () {
+                          ClipboardManager.copyToClipBoard(_randomKey);
+                          scaffoldState.currentState.showSnackBar(
+                            SnackBar(
+                              backgroundColor: Colors.grey[900],
+                              content: Text(
+                                "Copied to clipboard!",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

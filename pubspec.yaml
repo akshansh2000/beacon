@@ -27,6 +27,7 @@ dependencies:
   location:
   url_launcher:
   random_string:
+  clipboard_manager:
 
 dev_dependencies:
   flutter_test:

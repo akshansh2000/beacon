@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+GlobalKey<ScaffoldState> scaffoldState;
+
 class CommonScreen extends StatefulWidget {
   CommonScreen({
     Key key,
@@ -19,11 +21,16 @@ class CommonScreen extends StatefulWidget {
 class _CommonScreenState extends State<CommonScreen> {
   Size size;
 
+  _CommonScreenState() {
+    scaffoldState = GlobalKey<ScaffoldState>();
+  }
+
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
 
     return Scaffold(
+      key: scaffoldState,
       body: Stack(
         children: <Widget>[
           Center(
