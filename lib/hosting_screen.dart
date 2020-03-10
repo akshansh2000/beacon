@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:beacon/common_screen.dart';
+
 class HostingScreen extends StatefulWidget {
   HostingScreen({Key key}) : super(key: key);
 
@@ -8,26 +10,11 @@ class HostingScreen extends StatefulWidget {
 }
 
 class _HostingScreenState extends State<HostingScreen> {
-  Size size;
-
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
-
-    return Scaffold(
-      body: Center(
-        child: Hero(
-          tag: "host",
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.blueAccent,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            width: size.width / 1.2,
-            height: size.height / 1.2,
-          ),
-        ),
-      ),
+    return CommonScreen(
+      tag: "host",
+      color: Colors.blueAccent,
     );
   }
 }
