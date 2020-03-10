@@ -35,7 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      "HOST",
+                      "HOST\nBEACON",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
                         decoration: TextDecoration.none,
@@ -64,7 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      "TRACK",
+                      "TRACK\nBEACON",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
                         decoration: TextDecoration.none,
