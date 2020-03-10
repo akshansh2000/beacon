@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+
+import 'package:beacon/hosting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -19,23 +22,60 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Container(
-              width: size.width / 4,
-              height: size.width / 4,
-              decoration: BoxDecoration(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.circular(500),
+            GestureDetector(
+              child: Hero(
+                tag: "host",
+                child: Container(
+                  width: size.width / 4,
+                  height: size.width / 4,
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                    borderRadius: BorderRadius.circular(500),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "HOST",
+                      style: TextStyle(
+                        color: Colors.white,
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              child: Center(child: Text("HOST")),
+              onTap: () => Navigator.of(context).push(
+                CupertinoPageRoute(
+                  builder: (builder) => HostingScreen(),
+                ),
+              ),
             ),
-            Container(
-              width: size.width / 4,
-              height: size.width / 4,
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                borderRadius: BorderRadius.circular(500),
+            GestureDetector(
+              child: Container(
+                width: size.width / 4,
+                height: size.width / 4,
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(500),
+                ),
+                child: Center(
+                  child: Text(
+                    "TRACK",
+                    style: TextStyle(
+                      color: Colors.white,
+                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
               ),
-              child: Center(child: Text("TRACK")),
+              onTap: () => Navigator.of(context).push(
+                CupertinoPageRoute(
+                  builder: (builder) => HostingScreen(),
+                ),
+              ),
             ),
           ],
         ),
