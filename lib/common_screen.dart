@@ -34,7 +34,7 @@ class _CommonScreenState extends State<CommonScreen> {
                   color: widget.color,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                width: size.width / 1.2,
+                width: size.width / 1.1,
                 height: size.height / 1.2,
                 child: widget.child,
               ),
