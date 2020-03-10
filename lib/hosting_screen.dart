@@ -6,6 +6,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:random_string/random_string.dart';
 import 'package:location/location.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HostingScreen extends StatefulWidget {
   HostingScreen({Key key}) : super(key: key);
@@ -106,7 +107,14 @@ class _HostingScreenState extends State<HostingScreen> {
                       IconButton(
                         icon: Icon(Icons.arrow_forward_ios),
                         iconSize: 30,
-                        onPressed: () {},
+                        onPressed: () async {
+                          final urlString =
+                              "https://www.google.com/maps/search/?api=1&query=${locationData.latitude},${locationData.longitude}";
+                          if (await canLaunch(urlString))
+                            await launch(urlString);
+                          else
+                            throw "Could not load map";
+                        },
                       ),
                     ],
                   ),
