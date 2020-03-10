@@ -53,7 +53,7 @@ class _CommonScreenState extends State<CommonScreen> {
               padding: EdgeInsets.all(15),
               child: IconButton(
                 icon: Icon(Icons.close),
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => showWarning(context),
               ),
             ),
           ),
@@ -61,4 +61,30 @@ class _CommonScreenState extends State<CommonScreen> {
       ),
     );
   }
+}
+
+showWarning(context) {
+  showDialog(
+    context: context,
+    child: AlertDialog(
+      backgroundColor: Colors.grey[900],
+      title: Text("Are you sure?"),
+      content: Text(
+        "Your friends will no longer be able to track you. Still exit?",
+      ),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text("No"),
+        ),
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pop();
+          },
+          child: Text("Yes"),
+        ),
+      ],
+    ),
+  );
 }
