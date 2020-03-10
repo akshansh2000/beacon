@@ -23,67 +23,57 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            GestureDetector(
-              child: Hero(
-                tag: "host",
-                child: Container(
-                  width: size.width / 4,
-                  height: size.width / 4,
-                  decoration: BoxDecoration(
-                    color: Colors.blueAccent,
-                    borderRadius: BorderRadius.circular(500),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "HOST\nBEACON",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => Navigator.of(context).push(
-                CupertinoPageRoute(
-                  builder: (builder) => HostingScreen(),
-                ),
-              ),
+            customButton(
+              text: "HOST\nBEACON",
+              tag: "host",
+              color: Colors.blueAccent,
+              screen: HostingScreen(),
             ),
-            GestureDetector(
-              child: Hero(
-                tag: "track",
-                child: Container(
-                  width: size.width / 4,
-                  height: size.width / 4,
-                  decoration: BoxDecoration(
-                    color: Colors.redAccent,
-                    borderRadius: BorderRadius.circular(500),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "TRACK\nBEACON",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => Navigator.of(context).push(
-                CupertinoPageRoute(
-                  builder: (builder) => TrackingScreen(),
-                ),
-              ),
+            customButton(
+              text: "TRACK\nBEACON",
+              tag: "track",
+              color: Colors.redAccent,
+              screen: TrackingScreen(),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget customButton({
+    @required text,
+    @required tag,
+    @required color,
+    @required screen,
+  }) {
+    return GestureDetector(
+      child: Hero(
+        tag: tag,
+        child: Container(
+          width: size.width / 2,
+          height: size.width / 2,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(500),
+          ),
+          child: Center(
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                decoration: TextDecoration.none,
+                fontWeight: FontWeight.normal,
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ),
+      ),
+      onTap: () => Navigator.of(context).push(
+        CupertinoPageRoute(
+          builder: (builder) => screen,
         ),
       ),
     );
