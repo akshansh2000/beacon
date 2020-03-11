@@ -9,6 +9,7 @@ import 'package:random_string/random_string.dart';
 import 'package:location/location.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HostingScreen extends StatefulWidget {
   HostingScreen({Key key}) : super(key: key);
@@ -25,6 +26,7 @@ class _HostingScreenState extends State<HostingScreen> {
   Location location;
   LocationData locationData;
   StreamSubscription<LocationData> _locationDataStream;
+  SharedPreferences _prefs;
 
   @override
   void initState() {
@@ -32,11 +34,17 @@ class _HostingScreenState extends State<HostingScreen> {
 
     _databaseReference = FirebaseDatabase.instance.reference();
     location = Location();
+    _randomKey = randomAlphaNumeric(15);
     getLocation();
   }
 
   getLocation() async {
     locationData = await location.getLocation();
+
+    _prefs = await SharedPreferences.getInstance();
+    _databaseReference.child(_prefs.getString("lastKey") ?? "").remove();
+
+    _prefs.setString("lastKey", _randomKey);
     hostLocation();
 
     _locationDataStream =
@@ -47,11 +55,7 @@ class _HostingScreenState extends State<HostingScreen> {
   }
 
   hostLocation() async {
-    final _localRandomKey =
-        _randomKey == null ? randomAlphaNumeric(15) : _randomKey;
-    _randomKey = _localRandomKey;
-
-    _databaseReference.child(_localRandomKey).set({
+    _databaseReference.child(_randomKey).set({
       "lat": locationData.latitude,
       "lon": locationData.longitude,
     });

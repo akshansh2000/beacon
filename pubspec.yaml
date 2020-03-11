@@ -28,6 +28,7 @@ dependencies:
   url_launcher:
   random_string:
   clipboard_manager:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
