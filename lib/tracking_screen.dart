@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:beacon/common_screen.dart';
 
+import 'package:firebase_database/firebase_database.dart';
+
 class TrackingScreen extends StatefulWidget {
   TrackingScreen({Key key}) : super(key: key);
 
@@ -15,11 +17,14 @@ class _TrackingScreenState extends State<TrackingScreen> {
   TextEditingController _textEditingController;
   bool isLoading = true;
   Size size;
+  DatabaseReference _databaseReference;
+  double lat, lon;
 
   @override
   void initState() {
     super.initState();
     _textEditingController = TextEditingController();
+    _databaseReference = FirebaseDatabase.instance.reference();
 
     Timer(Duration(seconds: 1), () {
       setState(() {
@@ -95,6 +100,32 @@ class _TrackingScreenState extends State<TrackingScreen> {
                           ),
                         ),
                       );
+                    else {
+                      _databaseReference
+                          .child(_textEditingController.value.text)
+                          .once()
+                          .then(
+                        (DataSnapshot data) {
+                          if (data.value == null)
+                            scaffoldState.currentState.showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.grey[900],
+                                content: Text(
+                                  "Looks like no one is sharing their location with this ID, yet. Are you sure you entered the correct ID?",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            );
+                          else {
+                            lat = data.value["lat"];
+                            lon = data.value["lat"];
+                            print(lat.toString() + '\n' + lon.toString());
+                          }
+                        },
+                      );
+                    }
                   },
                 ),
               ],
