@@ -27,6 +27,30 @@ class _TrackingScreenState extends State<TrackingScreen> {
     _textEditingController = TextEditingController();
     _databaseReference = FirebaseDatabase.instance.reference();
 
+    _databaseReference.onValue.listen((data) {
+      _databaseReference
+          .child(_textEditingController.value.text)
+          .once()
+          .then((data) {
+        setState(() {
+          if (data.value == null && isLoaded)
+            scaffoldState.currentState.showSnackBar(
+              SnackBar(
+                backgroundColor: Colors.grey[900],
+                content: Text(
+                  "Beacon no more available. The location will not update further.",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            );
+          lat = data.value["lat"];
+          lon = data.value["lon"];
+        });
+      });
+    });
+
     Timer(Duration(seconds: 1), () {
       setState(() {
         isLoading = false;
