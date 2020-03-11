@@ -120,8 +120,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             );
                           else {
                             lat = data.value["lat"];
-                            lon = data.value["lat"];
-                            print(lat.toString() + '\n' + lon.toString());
+                            lon = data.value["lon"];
                           }
                         },
                       );
