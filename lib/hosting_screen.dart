@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:beacon/common_screen.dart';
@@ -20,19 +22,28 @@ class _HostingScreenState extends State<HostingScreen> {
   bool _isHosted = false;
   Size size;
   String _randomKey;
+  Location location;
   LocationData locationData;
+  StreamSubscription<LocationData> _locationDataStream;
 
   @override
   void initState() {
     super.initState();
 
     _databaseReference = FirebaseDatabase.instance.reference();
+    location = Location();
     getLocation();
   }
 
   getLocation() async {
-    locationData = await Location().getLocation();
+    locationData = await location.getLocation();
     hostLocation();
+
+    _locationDataStream =
+        location.onLocationChanged().listen((locationDetails) {
+      locationData = locationDetails;
+      hostLocation();
+    });
   }
 
   hostLocation() async {
@@ -53,6 +64,7 @@ class _HostingScreenState extends State<HostingScreen> {
   @override
   void dispose() {
     _databaseReference.child(_randomKey).remove();
+    _locationDataStream.cancel();
     super.dispose();
   }
 
@@ -93,8 +105,8 @@ class _HostingScreenState extends State<HostingScreen> {
                           ),
                         ),
                         Text(
-                          "${locationData.latitude.toStringAsFixed(4)}, "
-                          "${locationData.longitude.toStringAsFixed(4)}",
+                          "${locationData.latitude.toStringAsFixed(7)}, "
+                          "${locationData.longitude.toStringAsFixed(7)}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 28,
