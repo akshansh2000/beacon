@@ -7,7 +7,7 @@ class CommonScreen extends StatefulWidget {
     Key key,
     @required this.color,
     @required this.tag,
-    this.child,
+    @required this.child,
   }) : super(key: key);
 
   final Color color;
@@ -53,7 +53,7 @@ class _CommonScreenState extends State<CommonScreen> {
               padding: EdgeInsets.all(15),
               child: IconButton(
                 icon: Icon(Icons.close),
-                onPressed: () => showWarning(context),
+                onPressed: () => showWarning(context, widget.tag),
               ),
             ),
           ),
@@ -63,14 +63,16 @@ class _CommonScreenState extends State<CommonScreen> {
   }
 }
 
-showWarning(context) {
+showWarning(context, tag) {
   showDialog(
     context: context,
     child: AlertDialog(
       backgroundColor: Colors.grey[900],
       title: Text("Are you sure?"),
       content: Text(
-        "Your friends will no longer be able to track you. Still exit?",
+        tag == "host"
+            ? "Your friends will no longer be able to track you. Still exit?"
+            : "You will no longer be able to track your friend. Still exit?",
       ),
       actions: <Widget>[
         FlatButton(

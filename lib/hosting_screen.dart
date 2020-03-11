@@ -76,7 +76,7 @@ class _HostingScreenState extends State<HostingScreen> {
 
     return WillPopScope(
       onWillPop: () {
-        showWarning(context);
+        showWarning(context, "host");
         return null;
       },
       child: CommonScreen(
