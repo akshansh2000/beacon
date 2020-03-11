@@ -80,7 +80,22 @@ class _TrackingScreenState extends State<TrackingScreen> {
                 IconButton(
                   icon: Icon(Icons.check),
                   iconSize: 40,
-                  onPressed: () {},
+                  onPressed: () {
+                    final text = _textEditingController.value.text;
+                    if (text == null ||
+                        !RegExp("^[a-z|A-Z|\\d]{15}\$").hasMatch(text))
+                      scaffoldState.currentState.showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.grey[900],
+                          content: Text(
+                            "Please enter a valid ID.",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      );
+                  },
                 ),
               ],
             ),
