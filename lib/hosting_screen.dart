@@ -40,9 +40,7 @@ class _HostingScreenState extends State<HostingScreen> {
 
   getLocation() async {
     locationData = await location.getLocation();
-
     _prefs = await SharedPreferences.getInstance();
-    _databaseReference.child(_prefs.getString("lastKey") ?? "").remove();
 
     _prefs.setString("lastKey", _randomKey);
     hostLocation();

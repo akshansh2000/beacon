@@ -3,8 +3,18 @@ import 'package:flutter/services.dart';
 
 import 'package:beacon/home_screen.dart';
 
-void main() {
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SharedPreferences _prefs = await SharedPreferences.getInstance();
+  FirebaseDatabase.instance
+      .reference()
+      .child(_prefs.getString("lastKey"))
+      .remove();
+
   runApp(MyApp());
 }
 
