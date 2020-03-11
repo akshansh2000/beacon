@@ -50,7 +50,7 @@ class _CommonScreenState extends State<CommonScreen> {
           Align(
             alignment: Alignment.bottomRight,
             child: Padding(
-              padding: EdgeInsets.all(15),
+              padding: EdgeInsets.all(5),
               child: IconButton(
                 icon: Icon(Icons.close),
                 onPressed: () => showWarning(context, widget.tag),

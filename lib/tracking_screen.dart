@@ -56,7 +56,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 50,
+                    fontSize: 30,
                     color: Colors.white,
                     decoration: TextDecoration.none,
                     fontFamily: "Roboto",
@@ -84,7 +84,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                 SizedBox(height: 50),
                 IconButton(
                   icon: Icon(Icons.check),
-                  iconSize: 40,
+                  iconSize: 30,
                   onPressed: () {
                     final text = _textEditingController.value.text;
                     if (text == null ||

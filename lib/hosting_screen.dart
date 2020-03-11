@@ -93,7 +93,7 @@ class _HostingScreenState extends State<HostingScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 50,
+                        fontSize: 30,
                       ),
                     ),
                     Column(
@@ -103,15 +103,15 @@ class _HostingScreenState extends State<HostingScreen> {
                           padding: EdgeInsets.all(10),
                           child: Icon(
                             Icons.location_on,
-                            size: 40,
+                            size: 30,
                           ),
                         ),
                         Text(
-                          "${locationData.latitude.toStringAsFixed(7)}, "
-                          "${locationData.longitude.toStringAsFixed(7)}",
+                          "${locationData.latitude.toStringAsFixed(4)}, "
+                          "${locationData.longitude.toStringAsFixed(4)}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 28,
+                            fontSize: 24,
                           ),
                         ),
                       ],
@@ -125,13 +125,13 @@ class _HostingScreenState extends State<HostingScreen> {
                             "Open in Maps",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 30,
+                              fontSize: 24,
                             ),
                           ),
                         ),
                         IconButton(
                           icon: Icon(Icons.arrow_forward_ios),
-                          iconSize: 30,
+                          iconSize: 26,
                           onPressed: () async {
                             final urlString =
                                 "https://www.google.com/maps/search/?api=1&query=${locationData.latitude},${locationData.longitude}";
@@ -152,13 +152,13 @@ class _HostingScreenState extends State<HostingScreen> {
                             "$_randomKey",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 30,
+                              fontSize: 24,
                             ),
                           ),
                         ),
                         IconButton(
                           icon: Icon(Icons.content_copy),
-                          iconSize: 30,
+                          iconSize: 26,
                           onPressed: () {
                             ClipboardManager.copyToClipBoard(_randomKey);
                             scaffoldState.currentState.showSnackBar(
