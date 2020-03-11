@@ -12,7 +12,7 @@ void main() async {
   SharedPreferences _prefs = await SharedPreferences.getInstance();
   FirebaseDatabase.instance
       .reference()
-      .child(_prefs.getString("lastKey"))
+      .child(_prefs.getString("lastKey") ?? "")
       .remove();
 
   runApp(MyApp());
