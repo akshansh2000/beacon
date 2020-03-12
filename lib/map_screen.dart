@@ -16,38 +16,61 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   Completer _mapController = Completer<GoogleMapController>();
+  Size size;
 
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
+
     return StreamBuilder<Event>(
-        initialData: null,
-        stream: databaseReference.onValue,
-        builder: (context, snapshot) {
-          return SafeArea(
-            child: Stack(
-              children: <Widget>[
-                GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(lat, lon),
-                    zoom: 15,
-                  ),
-                  markers: {
-                    Marker(
-                      markerId: MarkerId("beacon"),
-                      position: LatLng(lat, lon),
-                    ),
-                  },
-                  compassEnabled: true,
-                  mapType: MapType.normal,
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
-                  rotateGesturesEnabled: true,
-                  scrollGesturesEnabled: true,
-                  zoomGesturesEnabled: true,
+      initialData: null,
+      stream: databaseReference.onValue,
+      builder: (context, snapshot) {
+        return SafeArea(
+          child: Scaffold(
+            body: GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: LatLng(lat, lon),
+                zoom: 15,
+              ),
+              markers: {
+                Marker(
+                  markerId: MarkerId("beacon"),
+                  position: LatLng(lat, lon),
                 ),
-              ],
+              },
+              compassEnabled: true,
+              mapType: MapType.normal,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: true,
+              rotateGesturesEnabled: true,
+              scrollGesturesEnabled: true,
+              zoomGesturesEnabled: true,
             ),
-          );
-        });
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.redAccent,
+              onPressed: () async {
+                final controller = await _mapController.future;
+
+                controller.animateCamera(
+                  CameraUpdate.newCameraPosition(
+                    CameraPosition(
+                      target: LatLng(lat, lon),
+                      zoom: 15,
+                    ),
+                  ),
+                );
+              },
+              child: Center(
+                child: Icon(
+                  Icons.location_on,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
