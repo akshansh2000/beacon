@@ -46,7 +46,9 @@ class _MapScreenState extends State<MapScreen> {
               rotateGesturesEnabled: true,
               scrollGesturesEnabled: true,
               zoomGesturesEnabled: true,
+              onMapCreated: (controller) => _mapController.complete(controller),
             ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.redAccent,
               onPressed: () async {

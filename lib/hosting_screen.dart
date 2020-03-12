@@ -66,7 +66,7 @@ class _HostingScreenState extends State<HostingScreen> {
 
   @override
   void dispose() {
-    // _databaseReference.child(_randomKey).remove();
+    _databaseReference.child(_randomKey).remove();
     _locationDataStream.cancel();
     super.dispose();
   }
