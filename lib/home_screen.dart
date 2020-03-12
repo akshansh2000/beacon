@@ -4,8 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:beacon/hosting_screen.dart';
 import 'package:beacon/tracking_screen.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key}) : super(key: key);
+  HomeScreen(this.prefs, {Key key}) : super(key: key);
+
+  final SharedPreferences prefs;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -27,17 +31,36 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    widget.prefs.getString("name"),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.edit),
+                    iconSize: 26,
+                    onPressed: () =>
+                        Navigator.of(context).pushReplacementNamed('/name'),
+                  ),
+                ],
+              ),
               customButton(
                 text: "HOST\nBEACON",
                 tag: "host",
                 color: Colors.blueAccent,
-                screen: HostingScreen(),
+                screen: '/host',
               ),
               customButton(
                 text: "TRACK\nBEACON",
                 tag: "track",
                 color: Colors.redAccent,
-                screen: TrackingScreen(),
+                screen: '/track',
               ),
             ],
           ),
@@ -76,11 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      onTap: () => Navigator.of(context).push(
-        CupertinoPageRoute(
-          builder: (builder) => screen,
-        ),
-      ),
+      onTap: () => Navigator.of(context).pushNamed(screen),
     );
   }
 }

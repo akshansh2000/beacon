@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'package:beacon/home_screen.dart';
 import 'package:beacon/name_screen.dart';
+import 'package:beacon/hosting_screen.dart';
+import 'package:beacon/tracking_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -40,7 +43,25 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         accentColor: Colors.white,
       ),
-      home: prefs.getString("name") == null ? NameScreen(prefs) : HomeScreen(),
+      onGenerateRoute: (settings) {
+        return CupertinoPageRoute(
+          builder: (_) {
+            switch (settings.name) {
+              case '/home':
+                return HomeScreen(prefs);
+              case '/host':
+                return HostingScreen();
+              case '/track':
+                return TrackingScreen();
+              case '/name':
+                return NameScreen(prefs);
+            }
+          },
+        );
+      },
+      home: prefs.getString("name") == null
+          ? NameScreen(prefs)
+          : HomeScreen(prefs),
     );
   }
 }
