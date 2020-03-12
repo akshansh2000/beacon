@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:beacon/common_screen.dart';
-import 'package:beacon/home_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 

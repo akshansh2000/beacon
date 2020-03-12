@@ -54,6 +54,7 @@ class _HostingScreenState extends State<HostingScreen> {
 
   hostLocation() async {
     _databaseReference.child(_randomKey).set({
+      "name": _prefs.getString("name") ?? "Anonymous",
       "lat": locationData.latitude,
       "lon": locationData.longitude,
     });
