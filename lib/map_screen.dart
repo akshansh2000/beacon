@@ -21,13 +21,28 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
+    GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
     return StreamBuilder<Event>(
       initialData: null,
       stream: databaseReference.onValue,
       builder: (context, snapshot) {
+        if (snapshot.data.snapshot.value == null)
+          _scaffoldState.currentState.showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.grey[900],
+              content: Text(
+                "Beacon no more available. The location will not update further.",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          );
+
         return SafeArea(
           child: Scaffold(
+            key: _scaffoldState,
             body: GoogleMap(
               initialCameraPosition: CameraPosition(
                 target: LatLng(lat, lon),
@@ -48,7 +63,8 @@ class _MapScreenState extends State<MapScreen> {
               zoomGesturesEnabled: true,
               onMapCreated: (controller) => _mapController.complete(controller),
             ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.redAccent,
               onPressed: () async {

@@ -20,6 +20,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   TextEditingController _textEditingController;
   bool isLoading = true, isLoaded = false;
   Size size;
+  String beaconName;
 
   @override
   void initState() {
@@ -47,6 +48,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
             );
           lat = data.value["lat"];
           lon = data.value["lon"];
+          beaconName = data.value["name"];
         });
       });
     });
@@ -75,7 +77,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Text(
-                    "TRACKING\nBEACON",
+                    "TRACKING\n${beaconName.toUpperCase()}",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,

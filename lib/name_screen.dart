@@ -32,7 +32,7 @@ class _NameScreenState extends State<NameScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "ENTER YOUR\nNAME",
+            "ENTER YOUR FIRST\nNAME, PLEASE",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.bold,
