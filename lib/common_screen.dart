@@ -48,9 +48,9 @@ class _CommonScreenState extends State<CommonScreen> {
             ),
           ),
           Align(
-            alignment: Alignment.bottomRight,
+            alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.all(5),
+              padding: EdgeInsets.only(bottom: 5),
               child: IconButton(
                 icon: Icon(Icons.close),
                 onPressed: () => showWarning(context, widget.tag),
