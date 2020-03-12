@@ -19,23 +19,28 @@ class _HomeScreenState extends State<HomeScreen> {
     size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            customButton(
-              text: "HOST\nBEACON",
-              tag: "host",
-              color: Colors.blueAccent,
-              screen: HostingScreen(),
-            ),
-            customButton(
-              text: "TRACK\nBEACON",
-              tag: "track",
-              color: Colors.redAccent,
-              screen: TrackingScreen(),
-            ),
-          ],
+      body: Container(
+        width: size.width,
+        height: size.height,
+        color: Colors.black,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              customButton(
+                text: "HOST\nBEACON",
+                tag: "host",
+                color: Colors.blueAccent,
+                screen: HostingScreen(),
+              ),
+              customButton(
+                text: "TRACK\nBEACON",
+                tag: "track",
+                color: Colors.redAccent,
+                screen: TrackingScreen(),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:beacon/home_screen.dart';
+import 'package:beacon/name_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         accentColor: Colors.white,
       ),
-      home: HomeScreen(),
+      home: NameScreen(),
     );
   }
 }

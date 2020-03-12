@@ -47,16 +47,17 @@ class _CommonScreenState extends State<CommonScreen> {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 5),
-              child: IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () => showWarning(context, widget.tag),
+          if (widget.tag != "null")
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 5),
+                child: IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () => showWarning(context, widget.tag),
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
