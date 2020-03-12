@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:beacon/common_screen.dart';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+DatabaseReference databaseReference;
+double lat, lon;
 
 class TrackingScreen extends StatefulWidget {
   TrackingScreen({Key key}) : super(key: key);
@@ -18,17 +20,15 @@ class _TrackingScreenState extends State<TrackingScreen> {
   TextEditingController _textEditingController;
   bool isLoading = true, isLoaded = false;
   Size size;
-  DatabaseReference _databaseReference;
-  double lat, lon;
 
   @override
   void initState() {
     super.initState();
     _textEditingController = TextEditingController();
-    _databaseReference = FirebaseDatabase.instance.reference();
+    databaseReference = FirebaseDatabase.instance.reference();
 
-    _databaseReference.onValue.listen((data) {
-      _databaseReference
+    databaseReference.onValue.listen((data) {
+      databaseReference
           .child(_textEditingController.value.text)
           .once()
           .then((data) {
@@ -118,14 +118,8 @@ class _TrackingScreenState extends State<TrackingScreen> {
                       IconButton(
                         icon: Icon(Icons.arrow_forward_ios),
                         iconSize: 26,
-                        onPressed: () async {
-                          final urlString =
-                              "https://www.google.com/maps/search/?api=1&query=$lat,$lon";
-                          if (await canLaunch(urlString))
-                            await launch(urlString);
-                          else
-                            throw "Could not load map";
-                        },
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed('/map'),
                       ),
                     ],
                   ),
@@ -192,7 +186,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                               ),
                             );
                           else {
-                            _databaseReference
+                            databaseReference
                                 .child(_textEditingController.value.text)
                                 .once()
                                 .then(
