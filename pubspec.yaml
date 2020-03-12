@@ -28,6 +28,7 @@ dependencies:
   url_launcher:
   random_string:
   shared_preferences:
+  google_maps_flutter:
 
 dev_dependencies:
   flutter_test:
