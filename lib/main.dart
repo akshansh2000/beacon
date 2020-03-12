@@ -6,6 +6,7 @@ import 'package:beacon/home_screen.dart';
 import 'package:beacon/name_screen.dart';
 import 'package:beacon/hosting_screen.dart';
 import 'package:beacon/tracking_screen.dart';
+import 'package:beacon/map_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -55,6 +56,8 @@ class MyApp extends StatelessWidget {
                 return TrackingScreen();
               case '/name':
                 return NameScreen(prefs);
+              case '/map':
+                return MapScreen();
             }
           },
         );
