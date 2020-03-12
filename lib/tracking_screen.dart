@@ -210,6 +210,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                                     isLoaded = true;
                                     lat = data.value["lat"];
                                     lon = data.value["lon"];
+                                    beaconName = data.value["name"];
                                   });
                                 }
                               },
