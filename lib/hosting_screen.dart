@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:beacon/common_screen.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:random_string/random_string.dart';
 import 'package:location/location.dart';
-import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -161,7 +161,7 @@ class _HostingScreenState extends State<HostingScreen> {
                           icon: Icon(Icons.content_copy),
                           iconSize: 26,
                           onPressed: () {
-                            ClipboardManager.copyToClipBoard(_randomKey);
+                            Clipboard.setData(ClipboardData(text: _randomKey));
                             scaffoldState.currentState.showSnackBar(
                               SnackBar(
                                 backgroundColor: Colors.grey[900],

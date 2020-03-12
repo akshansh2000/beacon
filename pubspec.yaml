@@ -27,7 +27,6 @@ dependencies:
   location:
   url_launcher:
   random_string:
-  clipboard_manager:
   shared_preferences:
 
 dev_dependencies:
