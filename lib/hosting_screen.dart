@@ -2,13 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:beacon/common_screen.dart';
+import 'package:beacon/map_screen_location.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:random_string/random_string.dart';
 import 'package:location/location.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HostingScreen extends StatefulWidget {
@@ -133,14 +134,14 @@ class _HostingScreenState extends State<HostingScreen> {
                         IconButton(
                           icon: Icon(Icons.arrow_forward_ios),
                           iconSize: 26,
-                          onPressed: () async {
-                            final urlString =
-                                "https://www.google.com/maps/search/?api=1&query=${locationData.latitude},${locationData.longitude}";
-                            if (await canLaunch(urlString))
-                              await launch(urlString);
-                            else
-                              throw "Could not load map";
-                          },
+                          onPressed: () => Navigator.of(context).push(
+                            CupertinoPageRoute(
+                              builder: (_) => MapScreenLocation(
+                                locationData.latitude,
+                                locationData.longitude,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
