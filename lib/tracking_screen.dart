@@ -166,6 +166,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                               data: ThemeData(
                                 primaryColor: Colors.white,
                                 textSelectionColor: Colors.blueGrey,
+                                hintColor: Colors.white,
                               ),
                               child: TextFormField(
                                 maxLines: 5,
@@ -179,6 +180,12 @@ class _TrackingScreenState extends State<TrackingScreen> {
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
