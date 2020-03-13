@@ -74,7 +74,6 @@ class _TrackingScreenState extends State<TrackingScreen> {
         showWarning(context, "track", shouldExit: widget.initLink != null);
         return null;
       },
-      
       child: CommonScreen(
         tag: "track",
         color: Colors.redAccent,
