@@ -89,7 +89,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   loadData() {
     databaseReference.child(decodedID).once().then(
       (DataSnapshot data) {
-        if (data.value == null)
+        if (data.value == null) {
           scaffoldState.currentState.showSnackBar(
             SnackBar(
               backgroundColor: Colors.grey[900],
@@ -101,7 +101,11 @@ class _TrackingScreenState extends State<TrackingScreen> {
               ),
             ),
           );
-        else {
+
+          setState(() {
+            isLoading = false;
+          });
+        } else {
           setState(() {
             isLoaded = true;
             isLoading = false;
