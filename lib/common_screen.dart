@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 GlobalKey<ScaffoldState> scaffoldState;
 
@@ -8,11 +9,13 @@ class CommonScreen extends StatefulWidget {
     @required this.color,
     @required this.tag,
     @required this.child,
+    this.shouldExit = false,
   }) : super(key: key);
 
   final Color color;
   final String tag;
   final Widget child;
+  final bool shouldExit;
 
   @override
   _CommonScreenState createState() => _CommonScreenState();
@@ -54,7 +57,11 @@ class _CommonScreenState extends State<CommonScreen> {
                 padding: EdgeInsets.only(bottom: 5),
                 child: IconButton(
                   icon: Icon(Icons.close),
-                  onPressed: () => showWarning(context, widget.tag),
+                  onPressed: () => showWarning(
+                    context,
+                    widget.tag,
+                    shouldExit: widget.shouldExit,
+                  ),
                 ),
               ),
             ),
@@ -64,7 +71,7 @@ class _CommonScreenState extends State<CommonScreen> {
   }
 }
 
-showWarning(context, tag) {
+showWarning(context, tag, {bool shouldExit = false}) {
   showDialog(
     context: context,
     child: AlertDialog(
@@ -82,6 +89,9 @@ showWarning(context, tag) {
         ),
         FlatButton(
           onPressed: () {
+            if (shouldExit)
+              SystemChannels.platform.invokeMethod("SystemNavigator.pop");
+
             Navigator.of(context).pop();
             Navigator.of(context).pop();
           },

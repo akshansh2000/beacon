@@ -10,11 +10,17 @@ import 'package:beacon/map_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:uni_links/uni_links.dart';
 
 SharedPreferences prefs;
+String initLink;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    initLink = await getInitialLink();
+  } on PlatformException {}
 
   prefs = await SharedPreferences.getInstance();
   FirebaseDatabase.instance
@@ -64,7 +70,9 @@ class MyApp extends StatelessWidget {
       },
       home: prefs.getString("name") == null
           ? NameScreen(prefs)
-          : HomeScreen(prefs),
+          : initLink != null
+              ? TrackingScreen(shouldExit: true)
+              : HomeScreen(prefs),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:beacon/common_screen.dart';
 
@@ -10,7 +11,9 @@ DatabaseReference databaseReference;
 double lat, lon;
 
 class TrackingScreen extends StatefulWidget {
-  TrackingScreen({Key key}) : super(key: key);
+  TrackingScreen({this.shouldExit = false, Key key}) : super(key: key);
+
+  final bool shouldExit;
 
   @override
   _TrackingScreenState createState() => _TrackingScreenState();
@@ -68,12 +71,13 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
     return WillPopScope(
       onWillPop: () {
-        showWarning(context, "track");
+        showWarning(context, "track", shouldExit: widget.shouldExit);
         return null;
       },
       child: CommonScreen(
         tag: "track",
         color: Colors.redAccent,
+        shouldExit: widget.shouldExit,
         child: isLoaded
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
