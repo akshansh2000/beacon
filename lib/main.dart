@@ -24,10 +24,10 @@ void main() async {
   } on PlatformException {}
 
   prefs = await SharedPreferences.getInstance();
-  FirebaseDatabase.instance
-      .reference()
-      .child(prefs.getString("lastKey") ?? "")
-      .remove();
+  // FirebaseDatabase.instance
+  //     .reference()
+  //     .child(prefs.getString("lastKey") ?? "")
+  //     .remove();
 
   runApp(MyApp());
 }

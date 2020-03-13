@@ -14,7 +14,9 @@ import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HostingScreen extends StatefulWidget {
-  HostingScreen({Key key}) : super(key: key);
+  HostingScreen({this.beaconKey, Key key}) : super(key: key);
+
+  final String beaconKey;
 
   @override
   _HostingScreenState createState() => _HostingScreenState();
@@ -30,6 +32,7 @@ class _HostingScreenState extends State<HostingScreen> {
   LocationData locationData;
   StreamSubscription<LocationData> _locationDataStream;
   SharedPreferences _prefs;
+  bool didTransfer = false;
 
   @override
   void initState() {
@@ -37,8 +40,10 @@ class _HostingScreenState extends State<HostingScreen> {
 
     _databaseReference = FirebaseDatabase.instance.reference();
     location = Location();
-    _randomKey = randomAlphaNumeric(15);
-    finalUrl = "https://app.beacon.cce/" + base64Encode(Utf8Encoder().convert(_randomKey));
+    _randomKey =
+        widget.beaconKey == null ? randomAlphaNumeric(15) : widget.beaconKey;
+    finalUrl = "https://app.beacon.cce/" +
+        base64Encode(Utf8Encoder().convert(_randomKey));
     getLocation();
   }
 
@@ -70,7 +75,7 @@ class _HostingScreenState extends State<HostingScreen> {
 
   @override
   void dispose() {
-    _databaseReference.child(_randomKey).remove();
+    if (!didTransfer) _databaseReference.child(_randomKey).remove();
     _locationDataStream.cancel();
     super.dispose();
   }
@@ -187,7 +192,7 @@ class _HostingScreenState extends State<HostingScreen> {
                         Padding(
                           padding: EdgeInsets.all(10),
                           child: Text(
-                            "Beacon Transfer ID",
+                            "Transfer Beacon",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
@@ -195,20 +200,42 @@ class _HostingScreenState extends State<HostingScreen> {
                           ),
                         ),
                         IconButton(
-                          icon: Icon(Icons.content_copy),
+                          icon: Icon(Icons.arrow_forward_ios),
                           iconSize: 26,
                           onPressed: () {
-                            Clipboard.setData(ClipboardData(text: _randomKey));
-                            scaffoldState.currentState.showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.grey[900],
-                                content: Text(
-                                  "Copied ID to clipboard!",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  backgroundColor: Colors.grey[900],
+                                  title: Text("Are you sure?"),
+                                  content: Text(
+                                      "Do you really want to transfer the beacon? "
+                                      "You will lose control of the beacon.\n\n"
+                                      "Share the beacon ID with the person you want to transfer the beacon to."),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(),
+                                      child: Text("Cancel"),
+                                    ),
+                                    FlatButton(
+                                      onPressed: () {
+                                        Clipboard.setData(
+                                          ClipboardData(text: _randomKey),
+                                        );
+
+                                        didTransfer = true;
+                                        _prefs.setString("lastKey", "");
+
+                                        Navigator.of(context).pop();
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text("Copy ID and Proceed"),
+                                    ),
+                                  ],
+                                );
+                              },
                             );
                           },
                         ),
