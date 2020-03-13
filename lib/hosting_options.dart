@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:beacon/common_screen.dart';
-import 'package:beacon/hosting_screen.dart';
 
 class HostingOptions extends StatelessWidget {
   @override

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,6 +25,7 @@ class _HostingScreenState extends State<HostingScreen> {
   bool _isHosted = false;
   Size size;
   String _randomKey;
+  String finalUrl;
   Location location;
   LocationData locationData;
   StreamSubscription<LocationData> _locationDataStream;
@@ -36,6 +38,7 @@ class _HostingScreenState extends State<HostingScreen> {
     _databaseReference = FirebaseDatabase.instance.reference();
     location = Location();
     _randomKey = randomAlphaNumeric(15);
+    finalUrl = "https://app.beacon.cce/" + base64Encode(Utf8Encoder().convert(_randomKey));
     getLocation();
   }
 
@@ -151,7 +154,40 @@ class _HostingScreenState extends State<HostingScreen> {
                         Padding(
                           padding: EdgeInsets.all(10),
                           child: Text(
-                            "$_randomKey",
+                            "Beacon Follow URL",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.content_copy),
+                          iconSize: 26,
+                          onPressed: () {
+                            Clipboard.setData(ClipboardData(text: finalUrl));
+                            scaffoldState.currentState.showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.grey[900],
+                                content: Text(
+                                  "Copied URL to clipboard!",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            "Beacon Transfer ID",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
@@ -167,7 +203,7 @@ class _HostingScreenState extends State<HostingScreen> {
                               SnackBar(
                                 backgroundColor: Colors.grey[900],
                                 content: Text(
-                                  "Copied to clipboard!",
+                                  "Copied ID to clipboard!",
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
