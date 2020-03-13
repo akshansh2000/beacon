@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
       home: prefs.getString("name") == null
           ? NameScreen(prefs)
           : initLink != null
-              ? TrackingScreen(shouldExit: true)
+              ? TrackingScreen(initLink: initLink)
               : HomeScreen(prefs),
     );
   }

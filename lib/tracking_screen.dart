@@ -11,9 +11,9 @@ DatabaseReference databaseReference;
 double lat, lon;
 
 class TrackingScreen extends StatefulWidget {
-  TrackingScreen({this.shouldExit = false, Key key}) : super(key: key);
+  TrackingScreen({this.initLink, Key key}) : super(key: key);
 
-  final bool shouldExit;
+  final String initLink;
 
   @override
   _TrackingScreenState createState() => _TrackingScreenState();
@@ -71,13 +71,14 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
     return WillPopScope(
       onWillPop: () {
-        showWarning(context, "track", shouldExit: widget.shouldExit);
+        showWarning(context, "track", shouldExit: widget.initLink != null);
         return null;
       },
+      
       child: CommonScreen(
         tag: "track",
         color: Colors.redAccent,
-        shouldExit: widget.shouldExit,
+        shouldExit: widget.initLink != null,
         child: isLoaded
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
