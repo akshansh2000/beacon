@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:beacon/hosting_screen.dart';
-import 'package:beacon/tracking_screen.dart';
+import 'package:beacon/deep_link.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
+    DeepLink();
 
     return Scaffold(
       body: Container(

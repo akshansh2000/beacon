@@ -29,6 +29,7 @@ dependencies:
   random_string:
   shared_preferences:
   google_maps_flutter:
+  uni_links:
 
 dev_dependencies:
   flutter_test:

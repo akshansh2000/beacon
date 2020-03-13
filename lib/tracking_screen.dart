@@ -46,9 +46,11 @@ class _TrackingScreenState extends State<TrackingScreen> {
                 ),
               ),
             );
-          lat = data.value["lat"];
-          lon = data.value["lon"];
-          beaconName = data.value["name"];
+          else {
+            lat = data.value["lat"];
+            lon = data.value["lon"];
+            beaconName = data.value["name"];
+          }
         });
       });
     });
