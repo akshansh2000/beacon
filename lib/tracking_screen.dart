@@ -116,7 +116,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                       Padding(
                         padding: EdgeInsets.all(10),
                         child: Text(
-                          "Open in Maps",
+                          "Show on Map",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
@@ -146,7 +146,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "ENTER YOUR\nFRIEND'S ID",
+                        "ENTER THE\nBEACON URL",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -162,13 +162,24 @@ class _TrackingScreenState extends State<TrackingScreen> {
                           color: Colors.transparent,
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: TextFormField(
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 24),
-                              controller: _textEditingController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
+                            child: Theme(
+                              data: ThemeData(
+                                primaryColor: Colors.white,
+                                textSelectionColor: Colors.blueGrey,
+                              ),
+                              child: TextFormField(
+                                maxLines: 5,
+                                minLines: 1,
+                                cursorColor: Colors.white,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                ),
+                                controller: _textEditingController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
                                 ),
                               ),
                             ),

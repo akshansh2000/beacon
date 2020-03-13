@@ -124,7 +124,7 @@ class _HostingScreenState extends State<HostingScreen> {
                         Padding(
                           padding: EdgeInsets.all(10),
                           child: Text(
-                            "Open in Maps",
+                            "Show on Map",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 24,

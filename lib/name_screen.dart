@@ -53,6 +53,7 @@ class _NameScreenState extends State<NameScreen> {
                     primaryColor: Colors.black,
                   ),
                   child: TextFormField(
+                    cursorColor: Colors.black,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 24,
