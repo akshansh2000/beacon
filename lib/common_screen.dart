@@ -10,12 +10,14 @@ class CommonScreen extends StatefulWidget {
     @required this.tag,
     @required this.child,
     this.shouldExit = false,
+    this.shouldShowDialog = true,
   }) : super(key: key);
 
   final Color color;
   final String tag;
   final Widget child;
   final bool shouldExit;
+  final bool shouldShowDialog;
 
   @override
   _CommonScreenState createState() => _CommonScreenState();
@@ -57,11 +59,13 @@ class _CommonScreenState extends State<CommonScreen> {
                 padding: EdgeInsets.only(bottom: 5),
                 child: IconButton(
                   icon: Icon(Icons.close),
-                  onPressed: () => showWarning(
-                    context,
-                    widget.tag,
-                    shouldExit: widget.shouldExit,
-                  ),
+                  onPressed: () => widget.shouldShowDialog
+                      ? showWarning(
+                          context,
+                          widget.tag,
+                          shouldExit: widget.shouldExit,
+                        )
+                      : Navigator.of(context).pop(),
                 ),
               ),
             ),

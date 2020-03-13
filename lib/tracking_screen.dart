@@ -135,6 +135,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
         tag: "track",
         color: Colors.redAccent,
         shouldExit: widget.initLink != null,
+        shouldShowDialog: isLoaded,
         child: isLoaded
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

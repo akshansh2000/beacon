@@ -8,6 +8,7 @@ class HostingOptions extends StatelessWidget {
     return CommonScreen(
       tag: "host",
       color: Colors.blueAccent,
+      shouldShowDialog: false,
       child: Padding(
         padding: EdgeInsets.all(15),
         child: Column(
