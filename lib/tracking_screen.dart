@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:beacon/common_screen.dart';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:location/location.dart';
 
 DatabaseReference databaseReference;
 double lat, lon;
@@ -124,11 +124,12 @@ class _TrackingScreenState extends State<TrackingScreen> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.arrow_forward_ios),
-                        iconSize: 26,
-                        onPressed: () =>
-                            Navigator.of(context).pushNamed('/map'),
-                      ),
+                          icon: Icon(Icons.arrow_forward_ios),
+                          iconSize: 26,
+                          onPressed: () async {
+                            await Location().requestPermission();
+                            Navigator.of(context).pushNamed('/map');
+                          }),
                     ],
                   ),
                 ],
