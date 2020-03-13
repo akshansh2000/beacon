@@ -67,6 +67,8 @@ class MyApp extends StatelessWidget {
                 return MapScreen();
               case '/hostOptions':
                 return HostingOptions();
+              case '/useExisting':
+                return ExistingBeacon();
             }
           },
         );

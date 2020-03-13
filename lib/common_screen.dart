@@ -11,6 +11,7 @@ class CommonScreen extends StatefulWidget {
     @required this.child,
     this.shouldExit = false,
     this.shouldShowDialog = true,
+    this.heightFactor,
   }) : super(key: key);
 
   final Color color;
@@ -18,6 +19,7 @@ class CommonScreen extends StatefulWidget {
   final Widget child;
   final bool shouldExit;
   final bool shouldShowDialog;
+  final double heightFactor;
 
   @override
   _CommonScreenState createState() => _CommonScreenState();
@@ -47,7 +49,9 @@ class _CommonScreenState extends State<CommonScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 width: size.width / 1.1,
-                height: size.height / 1.2,
+                height: widget.heightFactor == null
+                    ? size.height / 1.2
+                    : size.height / widget.heightFactor,
                 child: widget.child,
               ),
             ),

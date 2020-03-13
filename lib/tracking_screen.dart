@@ -134,6 +134,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
       child: CommonScreen(
         tag: "track",
         color: Colors.redAccent,
+        heightFactor: isLoaded ? null : 1.5,
         shouldExit: widget.initLink != null,
         shouldShowDialog: isLoaded,
         child: isLoaded
