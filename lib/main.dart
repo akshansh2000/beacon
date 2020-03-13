@@ -7,6 +7,7 @@ import 'package:beacon/name_screen.dart';
 import 'package:beacon/hosting_screen.dart';
 import 'package:beacon/tracking_screen.dart';
 import 'package:beacon/map_screen.dart';
+import 'package:beacon/hosting_options.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -64,6 +65,8 @@ class MyApp extends StatelessWidget {
                 return NameScreen(prefs);
               case '/map':
                 return MapScreen();
+              case '/hostOptions':
+                return HostingOptions();
             }
           },
         );

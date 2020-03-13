@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 text: "HOST\nBEACON",
                 tag: "host",
                 color: Colors.blueAccent,
-                screen: '/host',
+                screen: '/hostOptions',
               ),
               customButton(
                 text: "TRACK\nBEACON",
