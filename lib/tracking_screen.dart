@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,9 @@ class _TrackingScreenState extends State<TrackingScreen> {
   bool isLoading = true, isLoaded = false;
   Size size;
   String beaconName;
+  String decodedID;
+  RegExp regex =
+      RegExp("(?<=^https:\/\/app\.beacon\.cce\/)[A-Za-z0-9+\/]+={0,2}\$");
 
   @override
   void initState() {
@@ -31,11 +35,27 @@ class _TrackingScreenState extends State<TrackingScreen> {
     _textEditingController = TextEditingController();
     databaseReference = FirebaseDatabase.instance.reference();
 
+    if (widget.initLink != null) {
+      decodedID = urlToId(widget.initLink);
+
+      if (!regex.hasMatch(widget.initLink))
+        scaffoldState.currentState.showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.grey[900],
+            content: Text(
+              "Please enter a valid URL.",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        );
+      else
+        loadData();
+    }
+
     databaseReference.onValue.listen((data) {
-      databaseReference
-          .child(_textEditingController.value.text)
-          .once()
-          .then((data) {
+      databaseReference.child(decodedID).once().then((data) {
         setState(() {
           if (data.value == null && isLoaded)
             scaffoldState.currentState.showSnackBar(
@@ -59,10 +79,43 @@ class _TrackingScreenState extends State<TrackingScreen> {
     });
 
     Timer(Duration(seconds: 1), () {
-      setState(() {
-        isLoading = false;
-      });
+      if (widget.initLink == null)
+        setState(() {
+          isLoading = false;
+        });
     });
+  }
+
+  loadData() {
+    databaseReference.child(decodedID).once().then(
+      (DataSnapshot data) {
+        if (data.value == null)
+          scaffoldState.currentState.showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.grey[900],
+              content: Text(
+                "Looks like no one is sharing their location with this ID, yet. Are you sure you entered the correct ID?",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          );
+        else {
+          setState(() {
+            isLoaded = true;
+            isLoading = false;
+            lat = data.value["lat"];
+            lon = data.value["lon"];
+            beaconName = data.value["name"];
+          });
+        }
+      },
+    );
+  }
+
+  urlToId(String url) {
+    return String.fromCharCodes(base64Decode(regex.firstMatch(url).group(0)));
   }
 
   @override
@@ -199,13 +252,12 @@ class _TrackingScreenState extends State<TrackingScreen> {
                         iconSize: 30,
                         onPressed: () {
                           final text = _textEditingController.value.text;
-                          if (text == null ||
-                              !RegExp("^[a-z|A-Z|\\d]{15}\$").hasMatch(text))
+                          if (text == null || !regex.hasMatch(text))
                             scaffoldState.currentState.showSnackBar(
                               SnackBar(
                                 backgroundColor: Colors.grey[900],
                                 content: Text(
-                                  "Please enter a valid ID.",
+                                  "Please enter a valid URL.",
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -213,33 +265,10 @@ class _TrackingScreenState extends State<TrackingScreen> {
                               ),
                             );
                           else {
-                            databaseReference
-                                .child(_textEditingController.value.text)
-                                .once()
-                                .then(
-                              (DataSnapshot data) {
-                                if (data.value == null)
-                                  scaffoldState.currentState.showSnackBar(
-                                    SnackBar(
-                                      backgroundColor: Colors.grey[900],
-                                      content: Text(
-                                        "Looks like no one is sharing their location with this ID, yet. Are you sure you entered the correct ID?",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                else {
-                                  setState(() {
-                                    isLoaded = true;
-                                    lat = data.value["lat"];
-                                    lon = data.value["lon"];
-                                    beaconName = data.value["name"];
-                                  });
-                                }
-                              },
-                            );
+                            decodedID =
+                                urlToId(_textEditingController.value.text);
+
+                            loadData();
                           }
                         },
                       ),
