@@ -2,14 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:beacon/common_screen.dart';
 
-class HostingOptions extends StatefulWidget {
-  HostingOptions({Key key}) : super(key: key);
-
-  @override
-  _HostingOptionsState createState() => _HostingOptionsState();
-}
-
-class _HostingOptionsState extends State<HostingOptions> {
+class HostingOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonScreen(
