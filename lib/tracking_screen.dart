@@ -231,6 +231,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                                 maxLines: 5,
                                 minLines: 1,
                                 cursorColor: Colors.white,
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 24,

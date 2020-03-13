@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:beacon/common_screen.dart';
+import 'package:beacon/hosting_screen.dart';
+
+import 'package:firebase_database/firebase_database.dart';
 
 class HostingOptions extends StatelessWidget {
   @override
@@ -121,6 +125,7 @@ class _ExistingBeaconState extends State<ExistingBeacon> {
                   ),
                   child: TextFormField(
                     cursorColor: Colors.white,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -162,7 +167,38 @@ class _ExistingBeaconState extends State<ExistingBeacon> {
                       ),
                     ),
                   );
-                else {}
+                else {
+                  final databaseReference =
+                      FirebaseDatabase.instance.reference();
+
+                  databaseReference
+                      .child(_textEditingController.value.text)
+                      .once()
+                      .then(
+                    (DataSnapshot data) {
+                      if (data.value == null) {
+                        scaffoldState.currentState.showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.grey[900],
+                            content: Text(
+                              "Looks like no beacon with the above ID is available, yet. Are you sure you entered the correct ID?",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        );
+                      } else
+                        Navigator.of(context).pushReplacement(
+                          CupertinoPageRoute(
+                            builder: (_) => HostingScreen(
+                              beaconKey: _textEditingController.value.text,
+                            ),
+                          ),
+                        );
+                    },
+                  );
+                }
               },
             ),
           ),
