@@ -8,9 +8,9 @@ import 'package:beacon/hosting_screen.dart';
 import 'package:beacon/tracking_screen.dart';
 import 'package:beacon/map_screen.dart';
 import 'package:beacon/hosting_options.dart';
+import 'package:beacon/duration_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:uni_links/uni_links.dart';
 
 SharedPreferences prefs;
@@ -69,6 +69,8 @@ class MyApp extends StatelessWidget {
                 return HostingOptions();
               case '/useExisting':
                 return ExistingBeacon();
+              case '/duration':
+                return DurationScreen();
             }
           },
         );

@@ -32,7 +32,7 @@ class HostingOptions extends StatelessWidget {
             ),
             Column(
               children: <Widget>[
-                customButton("HOST NEW BEACON", '/host', context),
+                customButton("HOST NEW BEACON", '/duration', context),
                 SizedBox(height: 20),
                 customButton("USE EXISTING BEACON", '/useExisting', context),
               ],
