@@ -13,7 +13,7 @@ class PrefsFunctions {
     prefs = await SharedPreferences.getInstance();
   }
 
-  updatePrefs(key, value) {
+  updatePrefs(String key, value) {
     switch (value.runtimeType) {
       case int:
         prefs.setInt(key, value);

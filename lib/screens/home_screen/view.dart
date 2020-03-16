@@ -24,8 +24,14 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  prefsInstance.prefs.getString("name") ?? "EDIT NAME",
+                  prefsInstance.prefs.getString("name").toUpperCase() ??
+                      "EDIT NAME",
                   style: textTheme.headline,
+                ),
+                SizedBox(width: 10),
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () => Navigator.of(context).pushNamed("/name"),
                 ),
               ],
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:beacon/components/common_container.dart';
+import 'package:beacon/components/custom_snackbar.dart';
 import 'package:beacon/components/prefs.dart';
 
 class NameScreen extends StatefulWidget {
@@ -13,13 +14,21 @@ class NameScreen extends StatefulWidget {
 }
 
 class _NameScreenState extends State<NameScreen> {
-  TextEditingController _textEditingController;
+  final _textEditingController = TextEditingController();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController.text = prefsInstance.prefs.getString("name") ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
+      key: scaffoldKey,
       body: CommonContainer(
         heightFactor: 1.2,
         color: Colors.white,
@@ -49,18 +58,26 @@ class _NameScreenState extends State<NameScreen> {
               ),
               Spacer(),
               IconButton(
-                  icon: Icon(
-                    Icons.check,
-                    size: 40,
-                  ),
-                  onPressed: () {
-                    prefsInstance.updatePrefs(
-                        "name", _textEditingController.value.text);
+                icon: Icon(
+                  Icons.check,
+                  size: 40,
+                ),
+                onPressed: () {
+                  prefsInstance.updatePrefs(
+                      "name", _textEditingController.value.text);
 
-                    widget.shouldPop
-                        ? Navigator.of(context).pop()
-                        : Navigator.of(context).pushReplacementNamed("/home");
-                  }),
+                  _textEditingController.value.text.isEmpty
+                      ? scaffoldKey.currentState.showSnackBar(
+                          CustomSnackbar(
+                            "Please enter a valid name.",
+                            scaffoldKey.currentState,
+                          ),
+                        )
+                      : widget.shouldPop
+                          ? Navigator.of(context).pop()
+                          : Navigator.of(context).pushReplacementNamed("/home");
+                },
+              ),
               Spacer(flex: 2),
             ],
           ),
