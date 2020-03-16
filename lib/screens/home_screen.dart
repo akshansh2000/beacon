@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:beacon/components/home_screen_button.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen(this.prefs, {Key key}) : super(key: key);
-
-  final SharedPreferences prefs;
+  HomeScreen({Key key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -14,6 +12,26 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            HomeScreenButton(
+              text: "CREATE\nROOM",
+              color: Colors.redAccent,
+              route: null,
+              tag: null,
+            ),
+            HomeScreenButton(
+              text: "JOIN\nROOM",
+              color: Colors.blueAccent,
+              route: null,
+              tag: null,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
