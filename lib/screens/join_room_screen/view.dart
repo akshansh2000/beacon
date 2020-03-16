@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:beacon/components/common_container.dart';
+import 'package:beacon/components/custom_input.dart';
 
 class JoinRoomScreen extends StatefulWidget {
   JoinRoomScreen({Key key}) : super(key: key);
@@ -10,6 +11,8 @@ class JoinRoomScreen extends StatefulWidget {
 }
 
 class _JoinRoomScreenState extends State<JoinRoomScreen> {
+  final _textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,8 +20,12 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
         child: CommonContainer(
           heightFactor: 1.2,
           color: Colors.blueAccent,
-          child: null,
           tag: "join",
+          child: CustomInput(
+            title: "ENTER THE\nROOM URL",
+            textEditingController: _textEditingController,
+            onTap: null,
+          ),
         ),
       ),
     );

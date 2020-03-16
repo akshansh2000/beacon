@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:beacon/components/common_container.dart';
+import 'package:beacon/components/custom_input.dart';
 import 'package:beacon/components/custom_snackbar.dart';
 import 'package:beacon/components/prefs.dart';
 
@@ -25,64 +26,30 @@ class _NameScreenState extends State<NameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
     return Scaffold(
       key: scaffoldKey,
       body: Center(
         child: CommonContainer(
           heightFactor: 1.2,
           color: Colors.white,
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Spacer(flex: 2),
-                Text(
-                  "ENTER YOUR FIRST\nNAME, PLEASE",
-                  textAlign: TextAlign.center,
-                  style: textTheme.headline,
-                ),
-                Spacer(flex: 3),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: TextFormField(
-                    textAlign: TextAlign.center,
-                    style: textTheme.button,
-                    controller: _textEditingController,
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-                Spacer(),
-                IconButton(
-                  icon: Icon(
-                    Icons.check,
-                    size: 40,
-                  ),
-                  onPressed: () {
-                    prefsInstance.updatePrefs(
-                        "name", _textEditingController.value.text);
+          child: CustomInput(
+            title: "ENTER YOUR FIRST\nNAME, PLEASE",
+            textEditingController: _textEditingController,
+            onTap: () {
+              prefsInstance.updatePrefs(
+                  "name", _textEditingController.value.text);
 
-                    _textEditingController.value.text.isEmpty
-                        ? scaffoldKey.currentState.showSnackBar(
-                            CustomSnackbar(
-                              "Please enter a valid name.",
-                              scaffoldKey.currentState,
-                            ),
-                          )
-                        : widget.shouldPop
-                            ? Navigator.of(context).pop()
-                            : Navigator.of(context)
-                                .pushReplacementNamed("/home");
-                  },
-                ),
-                Spacer(flex: 2),
-              ],
-            ),
+              _textEditingController.value.text.isEmpty
+                  ? scaffoldKey.currentState.showSnackBar(
+                      CustomSnackbar(
+                        "Please enter a valid name.",
+                        scaffoldKey.currentState,
+                      ),
+                    )
+                  : widget.shouldPop
+                      ? Navigator.of(context).pop()
+                      : Navigator.of(context).pushReplacementNamed("/home");
+            },
           ),
         ),
       ),
