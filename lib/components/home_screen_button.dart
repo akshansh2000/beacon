@@ -21,26 +21,29 @@ class HomeScreenButton extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Center(
-      child: Container(
-        width: size.width / 3,
-        height: size.width / 3,
-        decoration: BoxDecoration(
-          border: Border.all(color: color),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Material(
-          color: theme.buttonColor,
-          child: InkWell(
+      child: Hero(
+        tag: tag,
+        child: Container(
+          width: size.width / 3,
+          height: size.width / 3,
+          decoration: BoxDecoration(
+            border: Border.all(color: color),
             borderRadius: BorderRadius.circular(20),
-            highlightColor: color,
-            child: Center(
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: textTheme.button,
+          ),
+          child: Material(
+            color: theme.buttonColor,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20),
+              highlightColor: color,
+              child: Center(
+                child: Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  style: textTheme.button,
+                ),
               ),
+              onTap: () => Navigator.of(context).pushNamed(route),
             ),
-            onTap: () {},
           ),
         ),
       ),
