@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:beacon/components/common_container.dart';
+import 'package:beacon/components/prefs.dart';
 
 class NameScreen extends StatefulWidget {
-  NameScreen({Key key}) : super(key: key);
+  NameScreen({this.shouldPop = true, Key key}) : super(key: key);
+
+  final bool shouldPop;
 
   @override
   _NameScreenState createState() => _NameScreenState();
@@ -46,12 +49,18 @@ class _NameScreenState extends State<NameScreen> {
               ),
               Spacer(),
               IconButton(
-                icon: Icon(
-                  Icons.check,
-                  size: 40,
-                ),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
+                  icon: Icon(
+                    Icons.check,
+                    size: 40,
+                  ),
+                  onPressed: () {
+                    prefsInstance.updatePrefs(
+                        "name", _textEditingController.value.text);
+
+                    widget.shouldPop
+                        ? Navigator.of(context).pop()
+                        : Navigator.of(context).pushReplacementNamed("/home");
+                  }),
               Spacer(flex: 2),
             ],
           ),
