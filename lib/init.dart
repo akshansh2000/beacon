@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 
 import 'package:beacon/components/prefs.dart';
 import 'package:beacon/components/theme.dart';
-import 'package:beacon/screens/home_screen/view.dart';
-import 'package:beacon/screens/join_room_screen/view.dart';
-import 'package:beacon/screens/name_screen/view.dart';
+import 'package:beacon/screens/home_screen.dart';
+import 'package:beacon/screens/join_room_screen.dart';
+import 'package:beacon/screens/name_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
