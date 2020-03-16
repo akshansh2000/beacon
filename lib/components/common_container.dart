@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 
 class CommonContainer extends StatelessWidget {
   const CommonContainer({
-    @required this.heightFactor,
     @required this.color,
     @required this.child,
     this.tag,
     Key key,
   }) : super(key: key);
 
-  final double heightFactor;
   final Color color;
   final Widget child;
   final String tag;
@@ -22,7 +20,7 @@ class CommonContainer extends StatelessWidget {
       tag: tag ?? "null",
       child: Container(
         width: size.width / 1.1,
-        height: size.height / heightFactor,
+        height: size.height / 1.2,
         decoration: BoxDecoration(
           border: Border.all(color: color),
           borderRadius: BorderRadius.circular(20),

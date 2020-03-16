@@ -30,7 +30,6 @@ class _NameScreenState extends State<NameScreen> {
       key: scaffoldKey,
       body: Center(
         child: CommonContainer(
-          heightFactor: 1.2,
           color: Colors.white,
           child: CustomInput(
             title: "ENTER YOUR FIRST\nNAME, PLEASE",

@@ -18,7 +18,6 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
     return Scaffold(
       body: Center(
         child: CommonContainer(
-          heightFactor: 1.2,
           color: Colors.blueAccent,
           tag: "join",
           child: CustomInput(

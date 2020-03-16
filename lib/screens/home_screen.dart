@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
             HomeScreenButton(
               text: "CREATE\nROOM",
               color: Colors.redAccent,
-              route: "/creatwee",
+              route: "/create",
               tag: "create",
             ),
             HomeScreenButton(
