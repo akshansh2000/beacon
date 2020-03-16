@@ -5,18 +5,21 @@ class CommonContainer extends StatelessWidget {
     @required this.heightFactor,
     @required this.color,
     @required this.child,
+    this.tag,
     Key key,
   }) : super(key: key);
 
   final double heightFactor;
   final Color color;
   final Widget child;
+  final String tag;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Center(
+    return Hero(
+      tag: tag ?? "null",
       child: Container(
         width: size.width / 1.1,
         height: size.height / heightFactor,

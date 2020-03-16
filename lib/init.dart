@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:beacon/components/prefs.dart';
 import 'package:beacon/components/theme.dart';
 import 'package:beacon/screens/home_screen/view.dart';
+import 'package:beacon/screens/join_room_screen/view.dart';
 import 'package:beacon/screens/name_screen/view.dart';
 
 class MyApp extends StatelessWidget {
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
                 return HomeScreen();
               case "/name":
                 return NameScreen();
+              case "/join":
+                return JoinRoomScreen();
             }
           },
         );
