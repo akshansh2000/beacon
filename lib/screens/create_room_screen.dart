@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:beacon/components/common_container.dart';
 import 'package:beacon/components/custom_input.dart';
+import 'package:beacon/components/custom_snackbar.dart';
 import 'package:beacon/components/date_modal_sheet.dart';
 
 class CreateRoomScreen extends StatefulWidget {
@@ -15,6 +16,7 @@ class CreateRoomScreen extends StatefulWidget {
 class _CreateRoomScreenState extends State<CreateRoomScreen> {
   final _textEditingController = TextEditingController();
   int hours = 3, minutes = 0;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -33,6 +35,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       body: Center(
         child: CommonContainer(
           color: Colors.redAccent,
@@ -59,7 +62,16 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 },
               );
             },
-            onTap: () {},
+            onTap: () {
+              hours == 0 && minutes < 15
+                  ? scaffoldKey.currentState.showSnackBar(
+                      CustomSnackbar(
+                        "The duration of a room cannot be less than 15 minutes.",
+                        scaffoldKey.currentState,
+                      ),
+                    )
+                  : Navigator.of(context).pushNamed("/share");
+            },
           ),
           tag: "create",
         ),
