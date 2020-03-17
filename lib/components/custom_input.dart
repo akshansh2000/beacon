@@ -5,12 +5,16 @@ class CustomInput extends StatelessWidget {
     @required this.title,
     @required this.textEditingController,
     @required this.onTap,
+    this.isReadOnly = false,
+    this.onFieldTap,
     Key key,
   }) : super(key: key);
 
   final String title;
   final TextEditingController textEditingController;
   final Function onTap;
+  final bool isReadOnly;
+  final Function onFieldTap;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +35,7 @@ class CustomInput extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: TextFormField(
+                readOnly: isReadOnly,
                 textAlign: TextAlign.center,
                 style: textTheme.button,
                 controller: textEditingController,
@@ -40,6 +45,7 @@ class CustomInput extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
+                onTap: isReadOnly ? onFieldTap : null,
               ),
             ),
           ),
