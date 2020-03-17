@@ -28,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       "EDIT NAME",
                   style: textTheme.headline,
                 ),
-                SizedBox(width: 10),
                 IconButton(
                   icon: Icon(Icons.edit),
                   onPressed: () => Navigator.of(context).pushNamed("/name"),
