@@ -85,7 +85,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                       .toString(),
                 );
 
-                Navigator.of(context).pushNamed("/share");
+                Navigator.of(context).pushNamed("/room");
               }
             },
           ),
