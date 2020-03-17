@@ -8,6 +8,7 @@ import 'package:beacon/screens/create_room_screen.dart';
 import 'package:beacon/screens/home_screen.dart';
 import 'package:beacon/screens/join_room_screen.dart';
 import 'package:beacon/screens/name_screen.dart';
+import 'package:beacon/screens/sharing_screen/view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
@@ -39,6 +40,8 @@ class MyApp extends StatelessWidget {
                 return JoinRoomScreen();
               case "/create":
                 return CreateRoomScreen();
+              case "/share":
+                return SharingScreen();
             }
           },
         );
