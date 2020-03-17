@@ -5,6 +5,7 @@ import 'package:beacon/components/common_container.dart';
 import 'package:beacon/components/custom_input.dart';
 import 'package:beacon/components/custom_snackbar.dart';
 import 'package:beacon/components/date_modal_sheet.dart';
+import 'package:beacon/components/prefs.dart';
 
 class CreateRoomScreen extends StatefulWidget {
   CreateRoomScreen({Key key}) : super(key: key);
@@ -63,14 +64,29 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
               );
             },
             onTap: () {
-              hours == 0 && minutes < 15
-                  ? scaffoldKey.currentState.showSnackBar(
-                      CustomSnackbar(
-                        "The duration of a room cannot be less than 15 minutes.",
-                        scaffoldKey.currentState,
-                      ),
-                    )
-                  : Navigator.of(context).pushNamed("/share");
+              if (hours == 0 && minutes < 15)
+                scaffoldKey.currentState.showSnackBar(
+                  CustomSnackbar(
+                    "The duration of a room cannot be less than 15 minutes.",
+                    scaffoldKey.currentState,
+                  ),
+                );
+              else {
+                final now = DateTime.now();
+                prefsInstance.updatePrefs(
+                  "expiration",
+                  now
+                      .add(
+                        Duration(
+                          hours: hours,
+                          minutes: minutes,
+                        ),
+                      )
+                      .toString(),
+                );
+
+                Navigator.of(context).pushNamed("/share");
+              }
             },
           ),
           tag: "create",
