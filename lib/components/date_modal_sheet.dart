@@ -26,7 +26,7 @@ class DateModalSheet extends StatelessWidget {
         child: CupertinoDatePicker(
           use24hFormat: true,
           mode: CupertinoDatePickerMode.time,
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.grey[900],
           initialDateTime: DateTime(1, 1, 1, hours, minutes),
           onDateTimeChanged: onChanged,
         ),
