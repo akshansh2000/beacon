@@ -19,16 +19,20 @@ class DateModalSheet extends StatelessWidget {
 
     return Container(
       height: size.height / 3,
+      color: Colors.grey[900],
       child: CupertinoTheme(
         data: CupertinoThemeData(
           brightness: Brightness.dark,
         ),
-        child: CupertinoDatePicker(
-          use24hFormat: true,
-          mode: CupertinoDatePickerMode.time,
+        child: CupertinoTimerPicker(
+          alignment: Alignment.center,
           backgroundColor: Colors.grey[900],
-          initialDateTime: DateTime(1, 1, 1, hours, minutes),
-          onDateTimeChanged: onChanged,
+          onTimerDurationChanged: onChanged,
+          mode: CupertinoTimerPickerMode.hm,
+          initialTimerDuration: Duration(
+            hours: hours,
+            minutes: minutes,
+          ),
         ),
       ),
     );

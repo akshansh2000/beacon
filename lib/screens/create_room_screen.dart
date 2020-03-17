@@ -48,10 +48,10 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 context: context,
                 builder: (context) {
                   return DateModalSheet(
-                    onChanged: (dateTime) {
+                    onChanged: (Duration duration) {
                       setState(() {
-                        hours = dateTime.hour;
-                        minutes = dateTime.minute;
+                        hours = duration.inHours;
+                        minutes = duration.inMinutes - (duration.inHours * 60);
                         _textEditingController.text =
                             intDurationToString(hours, minutes);
                       });
