@@ -24,6 +24,7 @@ class _RoomScreenState extends State<RoomScreen> {
   @override
   void initState() {
     super.initState();
+    locationData.shouldUpdate = true;
 
     Timer(
       Duration(seconds: 1),
@@ -33,6 +34,12 @@ class _RoomScreenState extends State<RoomScreen> {
         });
       },
     );
+  }
+
+  @override
+  void dispose() {
+    locationData.shouldUpdate = false;
+    super.dispose();
   }
 
   onWillPop() {

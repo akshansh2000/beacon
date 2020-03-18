@@ -10,6 +10,7 @@ class CustomLocationData {
   double lat, lon;
   LocationData _data;
   Location _location;
+  bool shouldUpdate = false;
 
   CustomLocationData() {
     _location = Location();
@@ -26,7 +27,7 @@ class CustomLocationData {
       bloc.roomDetails[prefsInstance.prefs.getString("id")]["lon"] =
           locationData.lon;
 
-      bloc.input.add(UpdateLocation());
+      if (shouldUpdate) bloc.input.add(UpdateLocation());
     });
   }
 
