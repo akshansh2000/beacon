@@ -32,7 +32,7 @@ class _NameScreenState extends State<NameScreen> {
         child: CommonContainer(
           color: Colors.white,
           child: CustomInput(
-            title: "ENTER YOUR FIRST\nNAME, PLEASE",
+            title: "ENTER YOUR\nFIRST AND LAST NAME,\nPLEASE",
             textEditingController: _textEditingController,
             onTap: () {
               prefsInstance.updatePrefs(
