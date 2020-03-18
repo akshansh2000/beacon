@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:beacon/components/prefs.dart';
 import 'package:beacon/screens/room_screen/bloc.dart';
 import 'package:beacon/screens/room_screen/event.dart';
 
@@ -27,7 +28,10 @@ class CustomDialog extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            bloc.input.add(DeleteRoom());
+            bloc.roomDetails[prefsInstance.prefs.getString("id")]["mode"] ==
+                    "host"
+                ? bloc.input.add(DeleteRoom())
+                : null;
 
             Navigator.of(context).pop();
             Navigator.of(context).pop();
