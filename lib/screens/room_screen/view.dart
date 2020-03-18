@@ -38,29 +38,31 @@ class _RoomScreenState extends State<RoomScreen> {
                 ),
               )
             : SafeArea(
-                child: Stack(
-                  children: <Widget>[
-                    GoogleMap(
-                      initialCameraPosition: CameraPosition(
-                        target: LatLng(
-                          snapshot.data.latitude,
-                          snapshot.data.longitude,
+                child: Scaffold(
+                  body: Stack(
+                    children: <Widget>[
+                      GoogleMap(
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(
+                            snapshot.data.latitude,
+                            snapshot.data.longitude,
+                          ),
+                          zoom: 15,
                         ),
-                        zoom: 15,
+                        compassEnabled: true,
+                        myLocationButtonEnabled: true,
+                        myLocationEnabled: true,
+                        rotateGesturesEnabled: true,
+                        scrollGesturesEnabled: true,
+                        zoomGesturesEnabled: true,
+                        buildingsEnabled: true,
+                        trafficEnabled: true,
+                        onMapCreated: (controller) =>
+                            _mapController.complete(controller),
                       ),
-                      compassEnabled: true,
-                      myLocationButtonEnabled: true,
-                      myLocationEnabled: true,
-                      rotateGesturesEnabled: true,
-                      scrollGesturesEnabled: true,
-                      zoomGesturesEnabled: true,
-                      buildingsEnabled: true,
-                      trafficEnabled: true,
-                      onMapCreated: (controller) =>
-                          _mapController.complete(controller),
-                    ),
-                    MemberListContainer(),
-                  ],
+                      MemberListContainer(),
+                    ],
+                  ),
                 ),
               );
       },
