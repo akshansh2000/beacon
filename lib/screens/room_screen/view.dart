@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:beacon/components/custom_snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import 'package:beacon/components/coding.dart';
 import 'package:beacon/components/custom_dialog.dart';
 import 'package:beacon/components/member_list_container.dart';
 import 'package:beacon/components/location.dart';
@@ -59,6 +62,7 @@ class _RoomScreenState extends State<RoomScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final scaffoldKey = GlobalKey<ScaffoldState>();
 
     return shouldLoad
         ? Scaffold(
@@ -77,6 +81,7 @@ class _RoomScreenState extends State<RoomScreen> {
                 return null;
               },
               child: Scaffold(
+                key: scaffoldKey,
                 body: Stack(
                   children: <Widget>[
                     Container(
@@ -103,6 +108,30 @@ class _RoomScreenState extends State<RoomScreen> {
                       ),
                     ),
                     MemberListContainer(),
+                  ],
+                ),
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerFloat,
+                floatingActionButton: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    FloatingActionButton(
+                      backgroundColor: Colors.blueAccent,
+                      heroTag: "share",
+                      child: Icon(Icons.person_add),
+                      onPressed: () {
+                        Clipboard.setData(
+                          ClipboardData(
+                            text: encodeIdToUrl(bloc.roomId),
+                          ),
+                        );
+
+                        scaffoldKey.currentState.showSnackBar(CustomSnackbar(
+                          "Copied group URL to clipboard.",
+                          scaffoldKey.currentState,
+                        ));
+                      },
+                    ),
                   ],
                 ),
               ),
