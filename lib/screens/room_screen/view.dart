@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'package:beacon/components/custom_dialog.dart';
 import 'package:beacon/components/member_list_container.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,7 +16,7 @@ class RoomScreen extends StatefulWidget {
 }
 
 class _RoomScreenState extends State<RoomScreen> {
-  Future<LocationData> _locationData;
+  LocationData _locationData;
   final _mapController = Completer<GoogleMapController>();
 
   @override
@@ -24,9 +25,19 @@ class _RoomScreenState extends State<RoomScreen> {
 
     Timer(
       Duration(seconds: 1),
-      () => setState(() {
-        _locationData = Location().getLocation();
-      }),
+      () async {
+        _locationData = await Location().getLocation();
+        setState(() {});
+      },
+    );
+  }
+
+  onWillPop() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CustomDialog("This room will be exited.");
+      },
     );
   }
 
@@ -34,52 +45,53 @@ class _RoomScreenState extends State<RoomScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return FutureBuilder(
-      future: _locationData,
-      builder: (context, snapshot) {
-        return !snapshot.hasData || snapshot == null
-            ? Scaffold(
-                body: Center(
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              )
-            : SafeArea(
-                child: Scaffold(
-                  body: Stack(
-                    children: <Widget>[
-                      Container(
-                        height: size.height * 0.65,
-                        width: size.width,
-                        child: GoogleMap(
-                          initialCameraPosition: CameraPosition(
-                            target: LatLng(
-                              snapshot.data.latitude,
-                              snapshot.data.longitude,
-                            ),
-                            zoom: 15,
+    return _locationData == null
+        ? Scaffold(
+            body: Center(
+              child: Container(
+                width: 50,
+                height: 50,
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          )
+        : SafeArea(
+            child: WillPopScope(
+              onWillPop: () {
+                onWillPop();
+                return null;
+              },
+              child: Scaffold(
+                body: Stack(
+                  children: <Widget>[
+                    Container(
+                      height: size.height * 0.65,
+                      width: size.width,
+                      child: GoogleMap(
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(
+                            _locationData.latitude,
+                            _locationData.longitude,
                           ),
-                          compassEnabled: true,
-                          myLocationButtonEnabled: true,
-                          myLocationEnabled: true,
-                          rotateGesturesEnabled: true,
-                          scrollGesturesEnabled: true,
-                          zoomGesturesEnabled: true,
-                          buildingsEnabled: true,
-                          trafficEnabled: true,
-                          onMapCreated: (controller) =>
-                              _mapController.complete(controller),
+                          zoom: 15,
                         ),
+                        compassEnabled: true,
+                        myLocationButtonEnabled: true,
+                        myLocationEnabled: true,
+                        rotateGesturesEnabled: true,
+                        scrollGesturesEnabled: true,
+                        zoomGesturesEnabled: true,
+                        buildingsEnabled: true,
+                        trafficEnabled: true,
+                        onMapCreated: (controller) =>
+                            _mapController.complete(controller),
                       ),
-                      MemberListContainer(),
-                    ],
-                  ),
+                    ),
+                    MemberListContainer(),
+                  ],
                 ),
-              );
-      },
-    );
+              ),
+            ),
+          );
   }
 }

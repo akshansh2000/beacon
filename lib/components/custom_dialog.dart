@@ -1,0 +1,39 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import 'package:beacon/screens/room_screen/bloc.dart';
+import 'package:beacon/screens/room_screen/event.dart';
+
+class CustomDialog extends StatelessWidget {
+  const CustomDialog(this.text, {Key key}) : super(key: key);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoAlertDialog(
+      title: Text("Are you sure?"),
+      content: Text(text),
+      actions: <Widget>[
+        FlatButton(
+          child: Text("NO"),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        FlatButton(
+          child: Text(
+            "YES",
+            style: TextStyle(
+              color: Colors.redAccent,
+            ),
+          ),
+          onPressed: () {
+            bloc.input.add(DeleteRoom());
+
+            Navigator.of(context).pop();
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
+}

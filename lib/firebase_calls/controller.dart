@@ -56,4 +56,8 @@ class FirebaseController {
 
     return _roomDetails;
   }
+
+  void deleteRoom(String roomId) {
+    _database.child(roomId).remove();
+  }
 }

@@ -24,6 +24,8 @@ class FirebaseBloc {
       if (event is CreateRoom) {
         roomId = randomAlphaNumeric(15);
         roomDetails = controller.createRoom(roomId);
+      } else if (event is DeleteRoom) {
+        controller.deleteRoom(roomId);
       }
 
       _intermediate.add(roomDetails);
