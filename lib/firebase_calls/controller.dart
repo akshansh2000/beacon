@@ -45,4 +45,15 @@ class FirebaseController {
 
     return _roomDetails;
   }
+
+  Map getDetails(String roomId) {
+    Map<String, dynamic> _roomDetails;
+
+    _database
+        .child(roomId)
+        .once()
+        .then((snapshot) => _roomDetails = snapshot.value);
+
+    return _roomDetails;
+  }
 }
