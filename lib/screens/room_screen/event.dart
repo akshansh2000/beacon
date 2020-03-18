@@ -2,6 +2,8 @@ abstract class FirebaseEvent {}
 
 class CreateRoom extends FirebaseEvent {}
 
+class JoinRoom extends FirebaseEvent {}
+
 class GetDetails extends FirebaseEvent {}
 
 class SetHost extends FirebaseEvent {}
