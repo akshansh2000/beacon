@@ -21,7 +21,13 @@ class _RoomScreenState extends State<RoomScreen> {
   @override
   void initState() {
     super.initState();
-    _locationData = Location().getLocation();
+
+    Timer(
+      Duration(seconds: 1),
+      () => setState(() {
+        _locationData = Location().getLocation();
+      }),
+    );
   }
 
   @override
@@ -32,11 +38,13 @@ class _RoomScreenState extends State<RoomScreen> {
       future: _locationData,
       builder: (context, snapshot) {
         return !snapshot.hasData || snapshot == null
-            ? Center(
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  child: CircularProgressIndicator(),
+            ? Scaffold(
+                body: Center(
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(),
+                  ),
                 ),
               )
             : SafeArea(
