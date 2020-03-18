@@ -34,7 +34,7 @@ class FirebaseController {
         _roomDetails.forEach(
           (key, value) {
             if (key != "expiry") {
-              _roomDetails[key]["mode"] = key == memberId ? "host" : "listener";
+              value["mode"] = key == memberId ? "host" : "listener";
             }
           },
         );
