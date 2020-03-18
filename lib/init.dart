@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: "beacon",
       theme: appTheme,
       onGenerateRoute: (settings) {
-        return CupertinoPageRoute(
+        return MaterialPageRoute(
           builder: (_) {
             switch (settings.name) {
               case "/home":
