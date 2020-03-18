@@ -1,3 +1,4 @@
+import 'package:beacon/components/location.dart';
 import 'package:beacon/components/prefs.dart';
 
 import 'package:firebase_database/firebase_database.dart';
@@ -17,6 +18,8 @@ class FirebaseController {
       prefsInstance.prefs.getString("id"): {
         "name": prefsInstance.prefs.getString("name"),
         "mode": "host",
+        "lat": locationData.lat,
+        "lon": locationData.lon,
       },
     };
 
@@ -30,6 +33,8 @@ class FirebaseController {
     _database.child(roomId).child(prefsInstance.prefs.getString("id")).set({
       "name": prefsInstance.prefs.getString("name"),
       "mode": "listener",
+      "lat": locationData.lat,
+      "lon": locationData.lon,
     });
 
     _database
@@ -71,6 +76,15 @@ class FirebaseController {
         .then((snapshot) => _roomDetails = snapshot.value);
 
     return _roomDetails;
+  }
+
+  void updateLocation(String roomId) {
+    _database
+        .child("$roomId/${prefsInstance.prefs.getString("id")}/lat")
+        .set(locationData.lat);
+    _database
+        .child("$roomId/${prefsInstance.prefs.getString("id")}/lon")
+        .set(locationData.lon);
   }
 
   void deleteRoom(String roomId) {

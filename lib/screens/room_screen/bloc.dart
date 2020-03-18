@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:beacon/components/prefs.dart';
 import 'package:beacon/firebase_calls/controller.dart';
 import 'package:beacon/screens/room_screen/event.dart';
 
@@ -24,6 +23,8 @@ class FirebaseBloc {
       if (event is CreateRoom) {
         roomId = randomAlphaNumeric(15);
         roomDetails = controller.createRoom(roomId);
+      } else if (event is UpdateLocation) {
+        controller.updateLocation(roomId);
       } else if (event is DeleteRoom) {
         controller.deleteRoom(roomId);
       }
