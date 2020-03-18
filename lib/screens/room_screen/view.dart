@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:beacon/components/prefs.dart';
+import 'package:beacon/components/member_list_container.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -38,24 +38,29 @@ class _RoomScreenState extends State<RoomScreen> {
                 ),
               )
             : SafeArea(
-                child: GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(
-                      snapshot.data.latitude,
-                      snapshot.data.longitude,
+                child: Stack(
+                  children: <Widget>[
+                    GoogleMap(
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(
+                          snapshot.data.latitude,
+                          snapshot.data.longitude,
+                        ),
+                        zoom: 15,
+                      ),
+                      compassEnabled: true,
+                      myLocationButtonEnabled: true,
+                      myLocationEnabled: true,
+                      rotateGesturesEnabled: true,
+                      scrollGesturesEnabled: true,
+                      zoomGesturesEnabled: true,
+                      buildingsEnabled: true,
+                      trafficEnabled: true,
+                      onMapCreated: (controller) =>
+                          _mapController.complete(controller),
                     ),
-                    zoom: 15,
-                  ),
-                  compassEnabled: true,
-                  myLocationButtonEnabled: true,
-                  myLocationEnabled: true,
-                  rotateGesturesEnabled: true,
-                  scrollGesturesEnabled: true,
-                  zoomGesturesEnabled: true,
-                  buildingsEnabled: true,
-                  trafficEnabled: true,
-                  onMapCreated: (controller) =>
-                      _mapController.complete(controller),
+                    MemberListContainer(),
+                  ],
                 ),
               );
       },
