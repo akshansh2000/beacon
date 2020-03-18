@@ -23,4 +23,23 @@ class FirebaseController {
     _database.child(roomId).set(_roomDetails);
     return _roomDetails;
   }
+
+  Map setHost(String roomId, String memberId) {
+    _database.child(roomId).once().then(
+      (snapshot) {
+        var _roomDetails = snapshot.value;
+
+        _roomDetails.forEach(
+          (key, value) {
+            if (key != "expiry") {
+              _roomDetails[key]["mode"] = key == memberId ? "host" : "listener";
+            }
+          },
+        );
+
+        _database.child(roomId).set(_roomDetails);
+        return _roomDetails;
+      },
+    );
+  }
 }

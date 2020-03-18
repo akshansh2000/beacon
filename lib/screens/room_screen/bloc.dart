@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:beacon/components/prefs.dart';
 import 'package:beacon/firebase_calls/controller.dart';
 import 'package:beacon/screens/room_screen/event.dart';
 
@@ -9,6 +10,7 @@ FirebaseBloc bloc;
 
 class FirebaseBloc {
   var roomDetails = Map();
+  String roomId;
 
   final _sinkController = StreamController<FirebaseEvent>();
   final _streamController = StreamController<Map>();
@@ -20,11 +22,11 @@ class FirebaseBloc {
   FirebaseBloc() {
     _mapEventToState(FirebaseEvent event) {
       if (event is CreateRoom) {
-        roomDetails = controller.createRoom(randomAlphaNumeric(15));
+        roomId = randomAlphaNumeric(15);
+        roomDetails = controller.createRoom(roomId);
       }
 
       _intermediate.add(roomDetails);
-      print(roomDetails);
     }
 
     _sinkController.stream.listen(_mapEventToState);

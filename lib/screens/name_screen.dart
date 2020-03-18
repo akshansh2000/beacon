@@ -40,9 +40,7 @@ class _NameScreenState extends State<NameScreen> {
               prefsInstance.updatePrefs(
                   "name", _textEditingController.value.text);
 
-              if (prefsInstance.prefs.getString("id") == null) {
-                prefsInstance.updatePrefs("id", randomAlphaNumeric(20));
-              }
+              prefsInstance.updatePrefs("id", randomAlphaNumeric(20));
 
               _textEditingController.value.text.isEmpty
                   ? scaffoldKey.currentState.showSnackBar(
