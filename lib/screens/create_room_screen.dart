@@ -74,7 +74,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
               else {
                 final now = DateTime.now();
                 prefsInstance.updatePrefs(
-                  "expiration",
+                  "expiry",
                   now
                       .add(
                         Duration(

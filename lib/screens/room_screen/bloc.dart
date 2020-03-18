@@ -1,19 +1,24 @@
 import 'dart:async';
 
+import 'package:beacon/firebase_calls/controller.dart';
 import 'package:beacon/screens/room_screen/event.dart';
 
-class FireBaseBloc {
+class FirebaseBloc {
   var roomDetails = Map();
 
-  final _sinkController = StreamController<FireBaseEvent>();
+  final _sinkController = StreamController<FirebaseEvent>();
   final _streamController = StreamController<Map>();
 
   StreamSink get input => _sinkController.sink;
   StreamSink get _intermediate => _streamController.sink;
   Stream get output => _streamController.stream;
 
-  FireBaseBloc() {
-    _mapEventToState(FireBaseEvent event) {}
+  FirebaseBloc() {
+    _mapEventToState(FirebaseEvent event) {
+      if (event is CreateRoom) {
+
+      }
+    }
 
     _sinkController.stream.listen(_mapEventToState);
   }

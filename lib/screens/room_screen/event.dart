@@ -1,5 +1,7 @@
-abstract class FireBaseEvent {}
+abstract class FirebaseEvent {}
 
-class GetMembers extends FireBaseEvent {}
+class CreateRoom extends FirebaseEvent {}
 
-class SetHost extends FireBaseEvent {}
+class GetMembers extends FirebaseEvent {}
+
+class SetHost extends FirebaseEvent {}
