@@ -6,6 +6,8 @@ import 'package:beacon/components/custom_input.dart';
 import 'package:beacon/components/custom_snackbar.dart';
 import 'package:beacon/components/date_modal_sheet.dart';
 import 'package:beacon/components/prefs.dart';
+import 'package:beacon/screens/room_screen/bloc.dart';
+import 'package:beacon/screens/room_screen/event.dart';
 
 class CreateRoomScreen extends StatefulWidget {
   CreateRoomScreen({Key key}) : super(key: key);
@@ -85,6 +87,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                       .toString(),
                 );
 
+                bloc.input.add(CreateRoom());
                 Navigator.of(context).pushNamed("/room");
               }
             },

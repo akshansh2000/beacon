@@ -5,6 +5,8 @@ import 'package:beacon/screens/room_screen/event.dart';
 
 import 'package:random_string/random_string.dart';
 
+FirebaseBloc bloc;
+
 class FirebaseBloc {
   var roomDetails = Map();
 
