@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:beacon/firebase_calls/controller.dart';
 import 'package:beacon/screens/room_screen/event.dart';
 
+import 'package:random_string/random_string.dart';
+
 class FirebaseBloc {
   var roomDetails = Map();
 
@@ -16,8 +18,11 @@ class FirebaseBloc {
   FirebaseBloc() {
     _mapEventToState(FirebaseEvent event) {
       if (event is CreateRoom) {
-
+        roomDetails = controller.createRoom(randomAlphaNumeric(15));
       }
+
+      _intermediate.add(roomDetails);
+      print(roomDetails);
     }
 
     _sinkController.stream.listen(_mapEventToState);

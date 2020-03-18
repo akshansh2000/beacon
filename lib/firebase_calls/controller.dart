@@ -14,13 +14,16 @@ class FirebaseController {
     _prefs = prefsInstance.prefs;
   }
 
-  createRoom(String roomId) {
-    _database.child(roomId).set({
+  Map createRoom(String roomId) {
+    final _roomDetails = {
       "expiry": _prefs.getString("expiry"),
       _prefs.getString("id"): {
         "name": _prefs.getString("name"),
         "mode": "host",
       },
-    });
+    };
+
+    _database.child(roomId).set(_roomDetails);
+    return _roomDetails;
   }
 }
