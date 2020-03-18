@@ -23,8 +23,14 @@ class FirebaseBloc {
       if (event is CreateRoom) {
         roomId = randomAlphaNumeric(15);
         roomDetails = controller.createRoom(roomId);
+      } else if (event is JoinRoom) {
+        roomDetails = controller.joinRoom(roomId);
+      } else if (event is GetDetails) {
+        roomDetails = controller.getDetails(roomId);
       } else if (event is UpdateLocation) {
         controller.updateLocation(roomId);
+      } else if (event is SetHost) {
+        roomDetails = controller.setHost(roomId, "memberId");
       } else if (event is DeleteRoom) {
         controller.deleteRoom(roomId);
       }
