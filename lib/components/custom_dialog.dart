@@ -12,7 +12,7 @@ class CustomDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoAlertDialog(
+    return AlertDialog(
       title: Text("Are you sure?"),
       content: Text(text),
       actions: <Widget>[

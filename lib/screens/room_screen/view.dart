@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'package:beacon/components/custom_dialog.dart';
 import 'package:beacon/components/member_list_container.dart';
+import 'package:beacon/components/location.dart';
 import 'package:beacon/components/prefs.dart';
 import 'package:beacon/screens/room_screen/bloc.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 
 class RoomScreen extends StatefulWidget {
   RoomScreen({Key key}) : super(key: key);
@@ -18,8 +18,8 @@ class RoomScreen extends StatefulWidget {
 }
 
 class _RoomScreenState extends State<RoomScreen> {
-  LocationData _locationData;
   final _mapController = Completer<GoogleMapController>();
+  bool shouldLoad = true;
 
   @override
   void initState() {
@@ -28,8 +28,9 @@ class _RoomScreenState extends State<RoomScreen> {
     Timer(
       Duration(seconds: 1),
       () async {
-        _locationData = await Location().getLocation();
-        setState(() {});
+        setState(() {
+          shouldLoad = false;
+        });
       },
     );
   }
@@ -52,7 +53,7 @@ class _RoomScreenState extends State<RoomScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return _locationData == null
+    return shouldLoad
         ? Scaffold(
             body: Center(
               child: Container(
@@ -77,8 +78,8 @@ class _RoomScreenState extends State<RoomScreen> {
                       child: GoogleMap(
                         initialCameraPosition: CameraPosition(
                           target: LatLng(
-                            _locationData.latitude,
-                            _locationData.longitude,
+                            locationData.lat,
+                            locationData.lon,
                           ),
                           zoom: 15,
                         ),
