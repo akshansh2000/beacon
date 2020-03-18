@@ -26,6 +26,8 @@ class _RoomScreenState extends State<RoomScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return FutureBuilder(
       future: _locationData,
       builder: (context, snapshot) {
@@ -41,24 +43,28 @@ class _RoomScreenState extends State<RoomScreen> {
                 child: Scaffold(
                   body: Stack(
                     children: <Widget>[
-                      GoogleMap(
-                        initialCameraPosition: CameraPosition(
-                          target: LatLng(
-                            snapshot.data.latitude,
-                            snapshot.data.longitude,
+                      Container(
+                        height: size.height * 0.65,
+                        width: size.width,
+                        child: GoogleMap(
+                          initialCameraPosition: CameraPosition(
+                            target: LatLng(
+                              snapshot.data.latitude,
+                              snapshot.data.longitude,
+                            ),
+                            zoom: 15,
                           ),
-                          zoom: 15,
+                          compassEnabled: true,
+                          myLocationButtonEnabled: true,
+                          myLocationEnabled: true,
+                          rotateGesturesEnabled: true,
+                          scrollGesturesEnabled: true,
+                          zoomGesturesEnabled: true,
+                          buildingsEnabled: true,
+                          trafficEnabled: true,
+                          onMapCreated: (controller) =>
+                              _mapController.complete(controller),
                         ),
-                        compassEnabled: true,
-                        myLocationButtonEnabled: true,
-                        myLocationEnabled: true,
-                        rotateGesturesEnabled: true,
-                        scrollGesturesEnabled: true,
-                        zoomGesturesEnabled: true,
-                        buildingsEnabled: true,
-                        trafficEnabled: true,
-                        onMapCreated: (controller) =>
-                            _mapController.complete(controller),
                       ),
                       MemberListContainer(),
                     ],

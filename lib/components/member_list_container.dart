@@ -9,17 +9,14 @@ class MemberListContainer extends StatelessWidget {
 
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Container(
-          width: size.width,
-          height: size.height / 2.5,
-          child: Material(
-            elevation: 10,
-            color: Colors.grey[100],
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(20),
-            ),
+      child: Container(
+        width: size.width,
+        height: size.height / 2.5,
+        child: Material(
+          elevation: 10,
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(50),
           ),
         ),
       ),
