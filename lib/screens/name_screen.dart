@@ -5,6 +5,8 @@ import 'package:beacon/components/custom_input.dart';
 import 'package:beacon/components/custom_snackbar.dart';
 import 'package:beacon/components/prefs.dart';
 
+import 'package:random_string/random_string.dart';
+
 class NameScreen extends StatefulWidget {
   NameScreen({this.shouldPop = true, Key key}) : super(key: key);
 
@@ -37,6 +39,10 @@ class _NameScreenState extends State<NameScreen> {
             onTap: () {
               prefsInstance.updatePrefs(
                   "name", _textEditingController.value.text);
+
+              if (prefsInstance.prefs.getString("id") == null) {
+                prefsInstance.updatePrefs("id", randomAlphaNumeric(20));
+              }
 
               _textEditingController.value.text.isEmpty
                   ? scaffoldKey.currentState.showSnackBar(
