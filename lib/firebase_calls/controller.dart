@@ -25,9 +25,11 @@ class FirebaseController {
   }
 
   Map setHost(String roomId, String memberId) {
+    Map<String, dynamic> _roomDetails;
+
     _database.child(roomId).once().then(
       (snapshot) {
-        var _roomDetails = snapshot.value;
+        _roomDetails = snapshot.value;
 
         _roomDetails.forEach(
           (key, value) {
@@ -38,8 +40,9 @@ class FirebaseController {
         );
 
         _database.child(roomId).set(_roomDetails);
-        return _roomDetails;
       },
     );
+
+    return _roomDetails;
   }
 }
