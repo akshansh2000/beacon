@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:beacon/components/custom_dialog.dart';
 import 'package:beacon/components/member_list_container.dart';
+import 'package:beacon/components/prefs.dart';
+import 'package:beacon/screens/room_screen/bloc.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -36,7 +38,12 @@ class _RoomScreenState extends State<RoomScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        return CustomDialog("This room will be exited.");
+        return CustomDialog(
+          bloc.roomDetails[prefsInstance.prefs.getString("id")]["mode"] ==
+                  "host"
+              ? "This room will be exited and deleted."
+              : "This room will be exited.",
+        );
       },
     );
   }
