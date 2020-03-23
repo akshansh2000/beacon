@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:beacon/firebase_calls/controller.dart';
-import 'package:beacon/screens/room_screen/event.dart';
+import '../../firebase_calls/controller.dart';
+import '../../screens/room_screen/event.dart';
 
 import 'package:random_string/random_string.dart';
 

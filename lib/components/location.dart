@@ -1,6 +1,6 @@
-import 'package:beacon/components/prefs.dart';
-import 'package:beacon/screens/room_screen/bloc.dart';
-import 'package:beacon/screens/room_screen/event.dart';
+import '../components/prefs.dart';
+import '../screens/room_screen/bloc.dart';
+import '../screens/room_screen/event.dart';
 
 import 'package:location/location.dart';
 

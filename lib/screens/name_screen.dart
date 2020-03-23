@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:beacon/components/common_container.dart';
-import 'package:beacon/components/custom_input.dart';
-import 'package:beacon/components/custom_snackbar.dart';
-import 'package:beacon/components/prefs.dart';
+import '../components/common_container.dart';
+import '../components/custom_input.dart';
+import '../components/custom_snackbar.dart';
+import '../components/prefs.dart';
 
 import 'package:random_string/random_string.dart';
 

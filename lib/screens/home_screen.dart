@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:beacon/components/home_screen_button.dart';
-import 'package:beacon/components/prefs.dart';
+import '../components/home_screen_button.dart';
+import '../components/prefs.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:beacon/screens/room_screen/bloc.dart';
+import '../screens/room_screen/bloc.dart';
 
 class MemberListContainer extends StatelessWidget {
   const MemberListContainer({Key key}) : super(key: key);

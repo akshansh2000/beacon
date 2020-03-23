@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:beacon/components/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:beacon/components/coding.dart';
-import 'package:beacon/components/custom_dialog.dart';
-import 'package:beacon/components/member_list_container.dart';
-import 'package:beacon/components/location.dart';
-import 'package:beacon/components/prefs.dart';
-import 'package:beacon/screens/room_screen/bloc.dart';
+import '../../components/coding.dart';
+import '../../components/custom_dialog.dart';
+import '../../components/custom_snackbar.dart';
+import '../../components/member_list_container.dart';
+import '../../components/location.dart';
+import '../../components/prefs.dart';
+import '../../screens/room_screen/bloc.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 

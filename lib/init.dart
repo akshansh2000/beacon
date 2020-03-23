@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:beacon/components/prefs.dart';
-import 'package:beacon/components/theme.dart';
-import 'package:beacon/screens/create_room_screen.dart';
-import 'package:beacon/screens/home_screen.dart';
-import 'package:beacon/screens/join_room_screen.dart';
-import 'package:beacon/screens/name_screen.dart';
-import 'package:beacon/screens/room_screen/view.dart';
+import 'components/prefs.dart';
+import 'components/theme.dart';
+import 'screens/create_room_screen.dart';
+import 'screens/home_screen.dart';
+import 'screens/join_room_screen.dart';
+import 'screens/name_screen.dart';
+import 'screens/room_screen/view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);

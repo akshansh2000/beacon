@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:beacon/components/common_container.dart';
-import 'package:beacon/components/custom_input.dart';
-import 'package:beacon/components/custom_snackbar.dart';
-import 'package:beacon/components/date_modal_sheet.dart';
-import 'package:beacon/components/prefs.dart';
-import 'package:beacon/screens/room_screen/bloc.dart';
-import 'package:beacon/screens/room_screen/event.dart';
+import '../components/common_container.dart';
+import '../components/custom_input.dart';
+import '../components/custom_snackbar.dart';
+import '../components/date_modal_sheet.dart';
+import '../components/prefs.dart';
+import '../screens/room_screen/bloc.dart';
+import '../screens/room_screen/event.dart';
 
 class CreateRoomScreen extends StatefulWidget {
   CreateRoomScreen({Key key}) : super(key: key);

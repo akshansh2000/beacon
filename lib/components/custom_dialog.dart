@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:beacon/components/prefs.dart';
-import 'package:beacon/screens/room_screen/bloc.dart';
-import 'package:beacon/screens/room_screen/event.dart';
+import '../components/prefs.dart';
+import '../screens/room_screen/bloc.dart';
+import '../screens/room_screen/event.dart';
 
 class CustomDialog extends StatelessWidget {
   const CustomDialog(this.text, {Key key}) : super(key: key);

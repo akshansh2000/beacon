@@ -1,5 +1,5 @@
-import 'package:beacon/components/location.dart';
-import 'package:beacon/components/prefs.dart';
+import '../components/location.dart';
+import '../components/prefs.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 

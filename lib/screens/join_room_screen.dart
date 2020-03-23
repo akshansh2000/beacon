@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:beacon/components/coding.dart';
-import 'package:beacon/components/common_container.dart';
-import 'package:beacon/components/custom_input.dart';
-import 'package:beacon/components/custom_snackbar.dart';
-import 'package:beacon/screens/room_screen/bloc.dart';
-import 'package:beacon/screens/room_screen/event.dart';
+import '../components/coding.dart';
+import '../components/common_container.dart';
+import '../components/custom_input.dart';
+import '../components/custom_snackbar.dart';
+import '../screens/room_screen/bloc.dart';
+import '../screens/room_screen/event.dart';
 
 class JoinRoomScreen extends StatefulWidget {
   JoinRoomScreen({Key key}) : super(key: key);
